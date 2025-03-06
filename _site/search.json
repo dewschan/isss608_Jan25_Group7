@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "ISSS 608, Term: January 2025, Group 7",
     "section": "",
-    "text": "This site is for project proposal.\n\nA &lt;- 1 +1 \nA\n\n[1] 2\n\n\n\nB &lt;- 1+5\nB\n\n[1] 6"
+    "text": "This site is for project proposal.\n\nA &lt;- 1 +1 \nA\n\n[1] 2\n\n\n\nB &lt;- 1+5\nC&lt;- A +B"
   },
   {
     "objectID": "about.html",
