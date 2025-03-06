@@ -8,3 +8,8 @@ This site is for project proposal.
 A <- 1 +1 
 A
 ```
+
+```{r}
+B <- 1+5
+B
+```
