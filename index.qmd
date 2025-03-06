@@ -1,0 +1,10 @@
+---
+title: "ISSS 608, Term: January 2025, Group 7"
+---
+
+This site is for project proposal.
+
+```{r}
+A <- 1 +1 
+A
+```
