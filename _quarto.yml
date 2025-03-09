@@ -5,6 +5,19 @@ website:
   title: "ISSS608_Jan25_Group 7"
   navbar:
     left:
+      - text: "Overview"
+        menu:
+        - text: "Proposal"
+          href: Overview/Proposal.html
+      - text: "Meeting Minutes"
+        menu:
+        - text: "Meeting Minutes 01"
+          href: NOM/Meeting Minutes 01.html
+        - text: "Meeting Minutes 02"
+          href: NOM/Meeting Minutes 02.html
+        - text: "Meeting Minutes 03"
+          href: NOM/Meeting Minutes 03.html
+    right:
       - href: index.qmd
         text: Home
       - about.qmd

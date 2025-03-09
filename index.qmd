@@ -2,14 +2,4 @@
 title: "ISSS 608, Term: January 2025, Group 7"
 ---
 
-This site is for project proposal.
-
-```{r}
-A <- 1 +1 
-A
-```
-
-```{r}
-B <- 1+5
-C<- A +B
-```
+Project site for ISSS 608 Visual Analytics and Applications.

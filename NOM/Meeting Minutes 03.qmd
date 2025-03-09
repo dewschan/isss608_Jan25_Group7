@@ -1,0 +1,152 @@
+---
+title: "Meeting Minutes 03"
+author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+date: "2025-03-02"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+**Meeting 3** \
+Date: 2 March, 2025 \
+Venue: MS Teams \
+Main Agenda: Reviewing datasets, preparing data for analysis, and crafting project proposal 
+
+Key Discussions: 
+
+-   Dataset Review: 
+
+<!-- -->
+
+-   Climate Data: Still in the process of crawling the web for lastest data 
+
+<!-- -->
+
+-   Electricity Consumption: Energy usage data, with breakdowns by household and commercial sectors. The team discussed using seasonal decomposition techniques to analyse how consumption patterns change during hotter months. 
+
+<!-- -->
+
+-   Health Data: Heat-related illness datasets such as dengue showed in certain months. Preliminary checks indicated that these peaks coincided with periods of higher temperatures. 
+
+<!-- -->
+
+-   Transportation Data: LTA ride-hailing and taxi demand data was presented, showing increased trips during hotter periods. This could provide insights into how extreme weather impacts mobility patterns. 
+
+<!-- -->
+
+-   Data Preprocessing: 
+
+<!-- -->
+
+-   Agreed on the following preprocessing steps: 
+
+<!-- -->
+
+-   Standardize time formats across all datasets. 
+
+<!-- -->
+
+-   Handle missing values by interpolation for climate data and mean imputation for health and electricity datasets. 
+
+<!-- -->
+
+-   Normalize continuous variables to ensure consistent scales across different datasets. 
+
+<!-- -->
+
+-   Proposal Crafting: 
+
+<!-- -->
+
+-   The team brainstormed the structure of the project proposal, with the following sections: 
+
+<!-- -->
+
+-   Introduction: Overview of climate change and its impacts on public health, electricity consumption, and transportation patterns. 
+
+<!-- -->
+
+-   Objective/Research Questions: 
+
+<!-- -->
+
+-   How does climate change affect electricity consumption patterns in Singapore? 
+
+<!-- -->
+
+-   Is there a significant relationship between rising temperatures and heat-related health issues? 
+
+<!-- -->
+
+-   How do transportation patterns change during extreme weather events? 
+
+<!-- -->
+
+-   Methodology: 
+
+<!-- -->
+
+-   Time series visualization using fable and ggplot2. 
+
+<!-- -->
+
+-   Correlation analysis between temperature and other datasets. 
+
+<!-- -->
+
+-   Data Sources: List of all datasets obtained and their descriptions. 
+
+<!-- -->
+
+-   Literature Review: To build on previously done research 
+
+<!-- -->
+
+-   Expected Outcomes/Storyboard: Insights into how climate change impacts daily life and potential recommendations for policymakers. 
+
+<!-- -->
+
+-   Project Timeline: 
+
+<!-- -->
+
+-   Week 1: Data collection and preprocessing 
+
+<!-- -->
+
+-   Week 2-3: Exploratory data analysis and visualizations, Correlation analysis and initial findings, Build Shiny-App 
+
+<!-- -->
+
+-   Week 4: Deeper Visualizations with CDA on Shiny-App 
+
+Tasks to Complete: 
+
+-   Sei Sar: Draft the Introduction and Data Sources sections. 
+
+<!-- -->
+
+-   Stella: Write the Methodology section and start creating time series visualizations for climate and electricity data 
+
+<!-- -->
+
+-   Sathvika: Write the Literature Review section. 
+
+Next Meeting Agenda: 
+
+-   Review first draft of the proposal. 
+
+<!-- -->
+
+-   Discuss early visualizations and findings. 
+
+To Do Before Next Meeting: 
+
+-   Have the first draft of the proposal ready by Mar 9 Sunday night. 
+
+<!-- -->
+
+-   Share initial visualizations in the team groupchat for feedback. 

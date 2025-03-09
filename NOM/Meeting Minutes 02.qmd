@@ -1,0 +1,80 @@
+---
+title: "Meeting Minutes 02"
+author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+date: "2025-02-24"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+**Meeting 2** \
+Date: 24 February, 2025 \
+Venue: MS Teams \
+Main Agenda: Discussing datasets, refining project focus, and dividing tasks 
+
+Key Discussions: 
+
+-   Dataset Selection: 
+
+<!-- -->
+
+-   Climate Data: We discussed using historical climate data, specifically temperature and humidity levels, to understand climate change trends over time. 
+
+<!-- -->
+
+-   Electricity Consumption: We decided to explore the correlation between rising temperatures and electricity consumption, particularly focusing on how heatwaves may lead to increased electricity usage for cooling purposes. 
+
+<!-- -->
+
+-   Health Impacts: We discussed using data on heat-related health issues, such as heatstroke, heat stress, and potentially even dengue cases, as heat impacts public health. 
+
+<!-- -->
+
+-   Transportation Data: The idea of analysing taxi and ride-hailing data (e.g., LTA data) came up, exploring how transportation patterns might change during heatwaves or periods of extreme weather. 
+
+<!-- -->
+
+-   Project Focus: 
+
+<!-- -->
+
+-   The team agreed that the focus would primarily be on climate change's impact on public health and electricity consumption, creating a time series visualization of how these factors evolve over time. 
+
+<!-- -->
+
+-   We would analyse the relationship between temperature and health outcomes, particularly dengue cases, while also considering energy consumption. 
+
+Tasks to Complete: 
+
+-   Dataset Collection: 
+
+<!-- -->
+
+-   Each member was assigned to find relevant datasets by Wednesday evening. 
+
+<!-- -->
+
+-   Sathvika: Search for historical climate data (temperature, humidity) from meteorological sources. 
+
+<!-- -->
+
+-   Sei Sar: Look for electricity consumption data from energy providers or governmental sources. 
+
+<!-- -->
+
+-   Stella: Research heat-related health data (e.g., heatstroke and heat stress data). 
+
+Next Meeting Agenda: 
+
+-   Review progress on data collection and discuss data cleaning and preparation strategies. 
+
+<!-- -->
+
+-   Finalize the overall direction of the project and the specific visualizations to create. 
+
+To Do Before Next Meeting: 
+
+-   All team members: Complete the dataset search and share findings by Sunday night. 

@@ -1,0 +1,88 @@
+---
+title: "Meeting Minutes 01"
+author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+date: "2025-02-17"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+**Meeting 1** \
+Date: 17 February, 2025 \
+Venue: MS Teams \
+Main Agenda: Selection of Project Topic and Initial Project Scope Discussion 
+
+Key Discussions: 
+
+-   Project Topic: The team decided on Climate Change as the project topic due to its relevance and potential for insightful time series visualizations. 
+
+<!-- -->
+
+-   Justification: 
+
+<!-- -->
+
+-   Climate data provides long-term trends that are suitable for time series analysis. 
+
+<!-- -->
+
+-   The topic allows for the integration of multiple publicly available datasets across different domains (health, energy, transportation). 
+
+<!-- -->
+
+-   Findings can generate actionable insights with social and policy implications. 
+
+<!-- -->
+
+-   Potential Data Sources to Research: 
+
+<!-- -->
+
+-   MOM: Workplace safety incidents related to heat stress. 
+
+<!-- -->
+
+-   MOH: Cases of heatstroke and heat stress across different months. 
+
+<!-- -->
+
+-   Electricity Consumption: Analysing energy demand patterns during hotter periods. 
+
+<!-- -->
+
+-   Dengue Cases: Possible correlation between temperature rise and dengue outbreaks. 
+
+<!-- -->
+
+-   LTA: Taxi and ride-hailing demand during extreme weather events. 
+
+<!-- -->
+
+-   Any other climate-related datasets that could provide additional insights. 
+
+To Do Next: 
+
+-   Each team member to research and propose relevant datasets by next week. 
+
+<!-- -->
+
+-   Create a shared document to list down dataset details (source, description, format, and availability). 
+
+<!-- -->
+
+-   Shortlist datasets to be used in the project based on availability and relevance. 
+
+Next Meeting Agenda: 
+
+-   Review proposed datasets. 
+
+<!-- -->
+
+-   Finalize dataset selection. 
+
+<!-- -->
+
+-   Outline preliminary data cleaning steps. 
