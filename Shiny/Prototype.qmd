@@ -1,0 +1,13 @@
+---
+title: "Prototype"
+author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
+date: "2025-03-10"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+The link to the project's [Shiny App](https://dewschan.shinyapps.io/Grp7_Shiny/).

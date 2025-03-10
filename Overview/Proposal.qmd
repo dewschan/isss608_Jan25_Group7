@@ -1,6 +1,6 @@
 ---
 title: "Proposal"
-author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
 date: "2025-03-09"
 date-modified: "last-modified"
 execute:
@@ -10,7 +10,7 @@ execute:
   freeze: true
 ---
 
-## 1. Motivation & Background 
+## 1. Motivation & Background
 
 Climate change has become an increasingly urgent issue, with its effects becoming more noticeable worldwide. Singapore, as a tropical island nation, faces significant challenges due to climate change, including rising temperatures, increased humidity, more frequent extreme weather events, and rising sea levels. These environmental changes have far-reaching implications for public health, urban infrastructure, energy consumption, and economic resilience.
 
@@ -22,7 +22,7 @@ Given the substantial impact of climate change on Singapore, it is crucial to an
 
 Our project aims to address several critical problems related to climate change in Singapore. One of the key objectives is to understand long-term climate trends by visualizing historical weather data, which will allow us to identify patterns such as rising temperatures, increased humidity, and extreme weather events.
 
-Another important aspect of this study is examining the health impacts of climate change. By correlating weather data with records from the National Environment Agency (NEA), we aim to study the increase in the spread of vector-borne diseases like dengue. Dengue is one of the major climate-related health issues in Singapore, as warmer temperatures and increased rainfall create ideal breeding conditions for mosquitoes, leading to a surge in dengue cases. [\[SH1\]](#_msocom_1) [\[SS2\]](#_msocom_2) [\[DY3\]](#_msocom_3) Understanding this links can help public health authorities implement better preventive measures and policies to mitigate health risks associated with climate change.
+Another important aspect of this study is examining the health impacts of climate change. By correlating weather data with records from the National Environment Agency (NEA), we aim to study the increase in the spread of vector-borne diseases like dengue. Dengue is one of the major climate-related health issues in Singapore, as warmer temperatures and increased rainfall create ideal breeding conditions for mosquitoes, leading to a surge in dengue cases. Understanding this links can help public health authorities implement better preventive measures and policies to mitigate health risks associated with climate change.
 
 In addition to health concerns, climate change also has significant implications for energy consumption. As temperatures rise, the demand for electricity, particularly for cooling purposes, is expected to increase. Investigating these patterns will help us assess the impact of climate change on Singapore’s energy needs and inform sustainable energy policies that balance efficiency and environmental responsibility.
 
@@ -30,7 +30,7 @@ Furthermore, extreme weather events can disrupt transportation networks and affe
 
 Overall, our project seeks to provide actionable insights that can guide policymakers, urban planners, and public health officials in developing effective climate adaptation and mitigation strategies. By presenting our findings through visual analytics, we aim to enhance awareness of climate challenges and contribute to Singapore’s efforts in building a more climate-resilient future.
 
-## 3. The Data sets 
+## 3. The Data sets
 
 To analyse the impact of climate change on various aspects of daily life in Singapore, we will integrate multiple data sets from different government agencies. Our primary data set will be historical weather data from the Meteorological Service Singapore, which will provide information on temperature trends, rainfall patterns, humidity levels, and extreme weather events over the years. This data will serve as the foundation for identifying climate-related changes and their potential consequences.
 
@@ -46,7 +46,7 @@ By combining these data sets, our project will provide a comprehensive analysis 
 
 ## 4. Methodology- Approach the team will take to solve the problem
 
-Link\>[\[SH4\]](#_msocom_4) 
+![](images/clipboard-951099499.png)
 
 ## 5. Relevant Related work (Literature Review)
 
@@ -66,4 +66,4 @@ The paper analyzes dengue risk in each study location using a distributed lag no
 
 5\) A Review and Case Analysis of the Impact of Weather Factors on Public Transportation in Singapore - The study investigates how weather factors affect the efficiency of transportation. High temperatures increase the number of passengers on the MRT, and heavy rains results in lengthier bus wait times, according to a Pearson correlation test. A multivariate linear regression model measures how each weather variable affects the effectiveness of public transportation. Demand patterns are impacted by temperature, while delays are most affected by rainfall. Bus and train delays are predicted with good accuracy (approx. 85%) via a Random Forest machine learning algorithm.
 
-## 6. Project Scope – Dashboard?? Early prototypes/Storyboards
+## 6. Project Scope – Dashboard,  Early prototypes, Storyboards

@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "ISSS608_Jan25_Group 7"
+  title: "ISSS 608-January 2025, Group 7"
   navbar:
     left:
       - text: "Overview"
@@ -17,11 +17,17 @@ website:
           href: NOM/Meeting Minutes 02.html
         - text: "Meeting Minutes 03"
           href: NOM/Meeting Minutes 03.html
+      - text: "Shiny App"
+        menu:
+        - text: "Data Preparation"
+          href: Shiny/Data_Prep.html
+        - text: "Mock-up App"
+          href: Shiny/Prototype.html
+        
     right:
       - href: index.qmd
         text: Home
       - about.qmd
-
 format:
   html:
     theme:

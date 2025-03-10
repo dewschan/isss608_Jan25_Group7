@@ -1,0 +1,37 @@
+---
+title: "Data Preparation"
+author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
+date: "2025-03-10"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+```{r}
+pacman::p_load(tidyverse, readxl)
+```
+
+```{r}
+weather<- read_csv("data/combined_weather_data.csv")
+```
+
+```{r}
+summary(weather)
+```
+
+```{r}
+Weekly_dengue <-read_xlsx("data/Denguecases.xlsx", "Weekly")
+
+Monthly_dengue <-read_xlsx("data/Denguecases.xlsx", "Monthly")
+```
+
+```{r}
+summary(Weekly_dengue)
+```
+
+```{r}
+summary(Monthly_dengue)
+```
