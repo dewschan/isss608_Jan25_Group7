@@ -10,4 +10,4 @@ execute:
   freeze: true
 ---
 
-The link to the project's [Shiny App](https://dewschan.shinyapps.io/Grp7_Shiny/).
+Click on the link to project's prototype [Shiny App](https://dewschan.shinyapps.io/Grp7_Shiny/).

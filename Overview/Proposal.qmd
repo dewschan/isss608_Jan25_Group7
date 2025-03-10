@@ -66,4 +66,6 @@ The paper analyzes dengue risk in each study location using a distributed lag no
 
 5\) A Review and Case Analysis of the Impact of Weather Factors on Public Transportation in Singapore - The study investigates how weather factors affect the efficiency of transportation. High temperatures increase the number of passengers on the MRT, and heavy rains results in lengthier bus wait times, according to a Pearson correlation test. A multivariate linear regression model measures how each weather variable affects the effectiveness of public transportation. Demand patterns are impacted by temperature, while delays are most affected by rainfall. Bus and train delays are predicted with good accuracy (approx. 85%) via a Random Forest machine learning algorithm.
 
-## 6. Project Scope – Dashboard,  Early prototypes, Storyboards
+## 6. Prototype
+
+Click [here](https://dewschan.shinyapps.io/Grp7_Shiny/) to project's prototype Shiny App.

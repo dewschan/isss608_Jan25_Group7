@@ -10,9 +10,19 @@ execute:
   freeze: true
 ---
 
+The following document details the data preparation process for the building the prototype for the shiny app of this project assignment.
+
+##  Libraries Used for Data Preparation. 
+
 ```{r}
 pacman::p_load(tidyverse, readxl)
 ```
+
+## Importing data sets
+
+The climate data set was being scrapped from [Meteorological Service Website, Singapore](https://www.weather.gov.sg/climate-historical-daily/) using beautiful soup python package.
+
+The scrapped historical daily records weather in Singapore were then combined using python into one csv file and loaded in R Studio.
 
 ```{r}
 weather<- read_csv("data/combined_weather_data.csv")
@@ -21,6 +31,10 @@ weather<- read_csv("data/combined_weather_data.csv")
 ```{r}
 summary(weather)
 ```
+
+The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.
+
+The data set provided by NEA is also publicly available [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
 
 ```{r}
 Weekly_dengue <-read_xlsx("data/Denguecases.xlsx", "Weekly")
@@ -34,4 +48,56 @@ summary(Weekly_dengue)
 
 ```{r}
 summary(Monthly_dengue)
+```
+
+```{r}
+
+weather$Mean_Temperature_C <- as.numeric(weather$`Mean Temperature (°C)`)
+weather$Maximum_Temperature_C <- as.numeric(weather$`Maximum Temperature (°C)`)
+weather$Minimum_Temperature_C <- as.numeric(weather$`Minimum Temperature (°C)`)
+
+
+weather_Monthly <- weather %>%
+  group_by(Year, Month) %>%
+  summarize(
+    AvgMeanTemp = mean(Mean_Temperature_C, na.rm = TRUE),
+    MaxTemp = max(Maximum_Temperature_C, na.rm = TRUE),
+    MinTemp = min(Minimum_Temperature_C, na.rm = TRUE)
+  )
+```
+
+```{r}
+
+Monthly_dengue_longer <- Monthly_dengue %>%
+  pivot_longer(
+    cols = 2:12,
+    names_to = "Year",
+    values_to = "denguecases"
+  )%>%filter(!str_detect(`Month/Year`, "Total")) %>%
+  rename(Month = `Month/Year`)
+
+
+Monthly_dengue_longer$Year <- as.numeric(Monthly_dengue_longer$Year)
+Monthly_dengue_longer$Month<- as.numeric(Monthly_dengue_longer$Month)
+print(Monthly_dengue_longer)
+
+```
+
+Combining of the temperature and dengue case data.
+
+```{r}
+combined_data <- Monthly_dengue_longer %>%   left_join(weather_Monthly, by = c("Year", "Month"))
+```
+
+Exporting processed data frames to csv files to be visualised in Shiny App.
+
+```{r}
+
+write.csv(Monthly_dengue_longer, file = "C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv", row.names = FALSE)
+
+write.csv(weather_Monthly, file = "C:/dewschan/Grp7_Shiny/data/weather_Monthly.csv", row.names = FALSE)
+
+write.csv(combined_data, file = "C:/dewschan/Grp7_Shiny/data/combined_data.csv", row.names = FALSE)
+
+
 ```

@@ -190,8 +190,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#libraries-used-for-data-preparation." id="toc-libraries-used-for-data-preparation." class="nav-link active" data-scroll-target="#libraries-used-for-data-preparation.">Libraries Used for Data Preparation.</a></li>
+  <li><a href="#importing-data-sets" id="toc-importing-data-sets" class="nav-link" data-scroll-target="#importing-data-sets">Importing data sets</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -233,9 +240,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>The following document details the data preparation process for the building the prototype for the shiny app of this project assignment.</p>
+<section id="libraries-used-for-data-preparation." class="level2">
+<h2 class="anchored" data-anchor-id="libraries-used-for-data-preparation.">Libraries Used for Data Preparation.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="importing-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-sets">Importing data sets</h2>
+<p>The climate data set was being scrapped from <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Website, Singapore</a> using beautiful soup python package.</p>
+<p>The scrapped historical daily records weather in Singapore were then combined using python into one csv file and loaded in R Studio.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/combined_weather_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -292,6 +307,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                                                            </code></pre>
 </div>
 </div>
+<p>The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.</p>
+<p>The data set provided by NEA is also publicly available <a href="https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases">NEA website</a> and <a href="https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin">Ministry of Health website.</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Weekly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Weekly"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -352,8 +369,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  Max.   :5258.0   Max.   :32173   Max.   :9949   Max.   :13651  </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Mean_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Maximum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Minimum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>weather_Monthly <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Month) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">AvgMeanTemp =</span> <span class="fu">mean</span>(Mean_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemp =</span> <span class="fu">max</span>(Maximum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemp =</span> <span class="fu">min</span>(Minimum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer <span class="ot">&lt;-</span> Monthly_dengue <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"denguecases"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>, <span class="st">"Total"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Year)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Month<span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Month)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Monthly_dengue_longer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 132 × 3
+   Month  Year denguecases
+   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
+ 1     1  2014        1887
+ 2     1  2015         982
+ 3     1  2016        2428
+ 4     1  2017         298
+ 5     1  2018         298
+ 6     1  2019        1071
+ 7     1  2020        1729
+ 8     1  2021         647
+ 9     1  2022         603
+10     1  2023        1016
+# ℹ 122 more rows</code></pre>
+</div>
+</div>
+<p>Combining of the temperature and dengue case data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> Monthly_dengue_longer <span class="sc">%&gt;%</span>   <span class="fu">left_join</span>(weather_Monthly, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exporting processed data frames to csv files to be visualised in Shiny App.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(Monthly_dengue_longer, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_Monthly, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/weather_Monthly.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(combined_data, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/combined_data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
