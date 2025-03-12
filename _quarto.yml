@@ -21,7 +21,7 @@ website:
         menu:
         - text: "Data Preparation"
           href: Shiny/Data_Prep.html
-        - text: "Mock-up App"
+        - text: "Prototype"
           href: Shiny/Prototype.html
         
     right:

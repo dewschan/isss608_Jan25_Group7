@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../Shiny/Prototype.html">
- <span class="dropdown-text">Mock-up App</span></a>
+ <span class="dropdown-text">Prototype</span></a>
   </li>  
     </ul>
   </li>
@@ -195,8 +195,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#libraries-used-for-data-preparation." id="toc-libraries-used-for-data-preparation." class="nav-link active" data-scroll-target="#libraries-used-for-data-preparation.">Libraries Used for Data Preparation.</a></li>
+  <li><a href="#libraries-used-for-data-preparation" id="toc-libraries-used-for-data-preparation" class="nav-link active" data-scroll-target="#libraries-used-for-data-preparation">Libraries Used for Data Preparation</a></li>
   <li><a href="#importing-data-sets" id="toc-importing-data-sets" class="nav-link" data-scroll-target="#importing-data-sets">Importing data sets</a></li>
+  <li><a href="#combining-of-the-temperature-and-dengue-case-data" id="toc-combining-of-the-temperature-and-dengue-case-data" class="nav-link" data-scroll-target="#combining-of-the-temperature-and-dengue-case-data">Combining of the temperature and dengue case data</a></li>
+  <li><a href="#exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app" id="toc-exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app" class="nav-link" data-scroll-target="#exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app">Exporting processed data frames to csv files to be visualised in Shiny App</a></li>
   </ul>
 </nav>
     </div>
@@ -229,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 10, 2025</p>
+      <p class="date-modified">March 12, 2025</p>
     </div>
   </div>
     
@@ -241,16 +243,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The following document details the data preparation process for the building the prototype for the shiny app of this project assignment.</p>
-<section id="libraries-used-for-data-preparation." class="level2">
-<h2 class="anchored" data-anchor-id="libraries-used-for-data-preparation.">Libraries Used for Data Preparation.</h2>
+<section id="libraries-used-for-data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-used-for-data-preparation">Libraries Used for Data Preparation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-data-sets" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data-sets">Importing data sets</h2>
-<p>The climate data set was being scrapped from <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Website, Singapore</a> using beautiful soup python package.</p>
-<p>The scrapped historical daily records weather in Singapore were then combined using python into one csv file and loaded in R Studio.</p>
+<p>The climate data set was being scraped from <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Website, Singapore</a> using beautiful soup python package.</p>
+<p>The scraped historical daily weather records in Singapore were then combined using python into one csv file and loaded in R Studio.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/combined_weather_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -308,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.</p>
-<p>The data set provided by NEA is also publicly available <a href="https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases">NEA website</a> and <a href="https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin">Ministry of Health website.</a></p>
+<p>The data set is also publicly available <a href="https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases">NEA website</a> and <a href="https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin">Ministry of Health website.</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Weekly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Weekly"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -413,11 +415,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 122 more rows</code></pre>
 </div>
 </div>
-<p>Combining of the temperature and dengue case data.</p>
+</section>
+<section id="combining-of-the-temperature-and-dengue-case-data" class="level2">
+<h2 class="anchored" data-anchor-id="combining-of-the-temperature-and-dengue-case-data">Combining of the temperature and dengue case data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> Monthly_dengue_longer <span class="sc">%&gt;%</span>   <span class="fu">left_join</span>(weather_Monthly, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Exporting processed data frames to csv files to be visualised in Shiny App.</p>
+</section>
+<section id="exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app" class="level2">
+<h2 class="anchored" data-anchor-id="exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app">Exporting processed data frames to csv files to be visualised in Shiny App</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(Monthly_dengue_longer, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
