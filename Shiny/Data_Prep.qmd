@@ -34,7 +34,7 @@ summary(weather)
 
 The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.
 
-The data set is also publicly available [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
+The data set is also publicly available on [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
 
 ```{r}
 Weekly_dengue <-read_xlsx("data/Denguecases.xlsx", "Weekly")
