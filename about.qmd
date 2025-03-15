@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-About this site
+This is our Visual Analytics Project!
 
-```{r}
-1 + 1
-```
+\- Sei Sar, Stella and Sathvika
