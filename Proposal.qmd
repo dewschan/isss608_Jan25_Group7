@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "<img src='images/icon.png' style='height:50px;'> Overview"
 author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
 date: "2025-03-09"
 date-modified: "last-modified"

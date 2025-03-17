@@ -1,5 +1,5 @@
 ---
-title: "SG ClimateViz: Understanding Climate Change in Singapore"
+title: "<img src='images/icon.png' style='height:80px;'> Understanding Climate Change in Singapore"
 ---
 
 ![](images/clipboard-3285200596.png)

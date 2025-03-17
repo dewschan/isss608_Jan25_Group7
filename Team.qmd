@@ -1,5 +1,5 @@
 ---
-title: "The Team"
+title: "<img src='images/icon.png' style='height:50px;'>The Team"
 ---
 
 ![](images/Team.png){fig-align="center"}
