@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "<img src='images/icon.png' style='height:40px;'>"
+  title: "<img src='icon.png' style='height:40px;'>"
   
   navbar:
     left:
