@@ -1,5 +1,5 @@
 ---
-title: "WeatherWatch SG"
+title: "SG ClimateViz: Understanding Climate Change in Singapore"
 ---
 
 ![](images/clipboard-3285200596.png)
@@ -8,22 +8,26 @@ title: "WeatherWatch SG"
 
 [^1]: The above photo was downloaded from <https://www.freepik.com/>
 
-Climate change is reshaping Singapore’s environment, with rising temperatures, shifting rainfall patterns, and increasing extreme weather events. These changes affect public health, energy consumption, and urban infrastructure. By analyzing historical weather data, we aim to uncover trends and provide valuable insights to help Singapore adapt to a changing climate.
+Climate change is reshaping Singapore’s environment, bringing rising temperatures, shifting rainfall patterns, and more extreme weather events. These changes have far-reaching consequences, affecting public health, energy consumption, and urban infrastructure. **SG ClimateViz** is an interactive platform designed to analyze historical weather data and provide meaningful insights into Singapore’s evolving climate landscape.
 
-The objectives for this project are as follows:
+By leveraging data from the Meteorological Service Singapore and integrating multiple datasets, **SG ClimateViz** allows users to explore trends, identify correlations, and make informed decisions. The platform aims to support policymakers, researchers, and the public in understanding how climate change impacts daily life and long-term sustainability.
 
--   **Understanding Climate Trends:** Analyzing temperature, humidity, and precipitation changes over time.
+### **Our Key Objectives**
 
--   **Public Health Impacts:** Exploring links between climate trends and the rise in vector-borne diseases like dengue.
+-   **Understanding Climate Trends**: Track changes in temperature, humidity, and precipitation over time to detect long-term patterns.
 
--   **Energy Consumption:** Examining the relationship between rising temperatures and electricity demand.
+-   **Public Health Impacts**: Analyze the link between climate trends and vector-borne diseases such as dengue.
 
--   **Urban Mobility:** Investigating how weather conditions affect transport patterns, including taxi and ride-hailing demand.
+-   **Energy Consumption**: Examine how rising temperatures influence electricity demand and energy efficiency.
 
-#### **Key Features**
+-   **Urban Mobility**: Investigate how weather conditions affect transport patterns, including taxi and ride-hailing demand.
 
--   **Interactive Data Visualization:** Users can explore climate trends through dynamic charts and geospatial maps.
+### **Key Features**
 
--   **Correlated Insights:** Integration of multiple datasets (weather, health, energy, and transport) for a holistic analysis.
+-   **Interactive Data Visualization**: Explore climate trends through dynamic charts, geospatial maps, and time-series analysis.
 
--   **User-Friendly Interface:** Designed for policymakers, researchers, and the public to easily access and interpret climate data.
+-   **Correlated Insights**: Gain a holistic view by integrating weather, health, energy, and transport data.
+
+-   **User-Friendly Interface**: Designed for accessibility, enabling easy interpretation of complex climate data.
+
+As Singapore navigates the challenges of a changing climate, **SG ClimateViz** serves as a vital tool to drive data-driven decision-making and foster resilience. Explore, analyze, and take action—because understanding the past is key to preparing for the future.

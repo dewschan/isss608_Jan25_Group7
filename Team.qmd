@@ -4,30 +4,32 @@ title: "The Team"
 
 ![](images/Team.png){fig-align="center"}
 
-The team aims to build an app that provides insights into how climate change influences various aspects of daily life in Singapore, including public health, energy consumption, and urban mobility
+The **SG ClimateViz** team is developing an interactive application to uncover how climate change influences key aspects of daily life in Singapore, including public health, energy consumption, and urban mobility. By analyzing historical weather data, the platform provides actionable insights to help stakeholders adapt to a changing climate.
 
-The following is the breakdown of the analysis modules for each team member:
+To achieve this, **SG ClimateViz** is structured into specialized analysis modules, each led by a team member:
 
-1.⁠ ⁠**Stella** – EDA & CDA
+1.  **Stella – Exploratory & Confirmatory Data Analysis (EDA & CDA)**
 
--   Data cleaning and preprocessing
+    -   Data cleaning and preprocessing to ensure high-quality datasets.
 
--   Summary statistics and visualisations (histograms, boxplots, time-series trends)
+    -   Summary statistics and visualizations (e.g., histograms, boxplots, time-series trends).
 
--   Hypothesis testing and statistical validation
+    -   Hypothesis testing and statistical validation to support key findings.
 
-2.⁠ ⁠**Sathvika** – Univariate Forecasting & Trend Analysis
+2.  **Sathvika – Univariate Forecasting & Trend Analysis**
 
--   Time series decomposition
+    -   Time series decomposition to understand seasonality and trends.
 
--   ARIMA or other forecasting techniques
+    -   Application of forecasting techniques such as ARIMA to predict climate variations.
 
--   Evaluating forecast accuracy and interpreting trends in weather patterns
+    -   Evaluating forecast accuracy and interpreting long-term weather patterns.
 
-3.**⁠ ⁠Sei Sar** – Geospatial Interpolation & Climate Change Impact Analysis
+3.  **Sei Sar – Geospatial Interpolation & Climate Change Impact Analysis**
 
--   Mapping temperature and precipitation changes over time using GIS techniques
+    -   Mapping temperature and precipitation changes over time using GIS techniques.
 
--   Interpolation methods like IDW (Inverse Distance Weighting)
+    -   Implementing interpolation methods like Inverse Distance Weighting (IDW) for spatial analysis.
 
--   Analyzing spatial trends and their implications for climate change
+    -   Identifying spatial climate trends and their implications for Singapore’s environment.
+
+Together, these modules ensure that **SG ClimateViz** delivers a comprehensive, data-driven understanding of Singapore’s evolving climate.

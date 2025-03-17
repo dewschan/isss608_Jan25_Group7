@@ -2,19 +2,19 @@ project:
   type: website
 
 website:
-  title: "WeatherWatch SG"
+  title: "<img src='images/icon.png' style='height:40px;'>"
   
   navbar:
     left:
       - text: "Overview"
         href: Proposal.html
+      - Team.qmd
       - text: "Shiny App"
         menu:
         - text: "Data Preparation"
           href: Shiny/Data_Prep.html
         - text: "Prototype"
           href: Shiny/Prototype.html
-      - Team.qmd
       - text: "Meeting Minutes"
         menu:
         - text: "Meeting Minutes 01"
