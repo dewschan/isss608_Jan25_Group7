@@ -2,13 +2,19 @@ project:
   type: website
 
 website:
-  title: "ISSS 608-January 2025, Group 7"
+  title: "WeatherWatch SG"
+  
   navbar:
     left:
       - text: "Overview"
+        href: Proposal.html
+      - text: "Shiny App"
         menu:
-        - text: "Proposal"
-          href: Overview/Proposal.html
+        - text: "Data Preparation"
+          href: Shiny/Data_Prep.html
+        - text: "Prototype"
+          href: Shiny/Prototype.html
+      - Team.qmd
       - text: "Meeting Minutes"
         menu:
         - text: "Meeting Minutes 01"
@@ -17,17 +23,7 @@ website:
           href: NOM/Meeting Minutes 02.html
         - text: "Meeting Minutes 03"
           href: NOM/Meeting Minutes 03.html
-      - text: "Shiny App"
-        menu:
-        - text: "Data Preparation"
-          href: Shiny/Data_Prep.html
-        - text: "Prototype"
-          href: Shiny/Prototype.html
-        
-    right:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+
 format:
   html:
     theme:

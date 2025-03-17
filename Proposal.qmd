@@ -1,5 +1,5 @@
 ---
-title: "Proposal"
+title: "Overview"
 author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
 date: "2025-03-09"
 date-modified: "last-modified"
@@ -44,11 +44,11 @@ In addition to weather data, we will incorporate a few other data sets with the 
 
 By combining these data sets, our project will provide a comprehensive analysis of how climate change affects various aspects of everyday life in Singapore.
 
-## 4. Methodology- Approach the team will take to solve the problem
+## 4. Methodology
 
-![](images/clipboard-951099499.png)
+![](images/Methodology.png){fig-align="center"}
 
-## 5. Relevant Related work (Literature Review)
+## 5. Literature Review
 
 We analyzed six research articles in relation to our project topic:
 

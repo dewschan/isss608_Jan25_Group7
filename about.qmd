@@ -1,7 +1,0 @@
----
-title: "About"
----
-
-This is our Visual Analytics Project!
-
-\- Sei Sar, Stella and Sathvika

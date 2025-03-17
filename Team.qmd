@@ -1,0 +1,33 @@
+---
+title: "The Team"
+---
+
+![](images/Team.png){fig-align="center"}
+
+The team aims to build an app that provides insights into how climate change influences various aspects of daily life in Singapore, including public health, energy consumption, and urban mobility
+
+The following is the breakdown of the analysis modules for each team member:
+
+1.⁠ ⁠**Stella** – EDA & CDA
+
+-   Data cleaning and preprocessing
+
+-   Summary statistics and visualisations (histograms, boxplots, time-series trends)
+
+-   Hypothesis testing and statistical validation
+
+2.⁠ ⁠**Sathvika** – Univariate Forecasting & Trend Analysis
+
+-   Time series decomposition
+
+-   ARIMA or other forecasting techniques
+
+-   Evaluating forecast accuracy and interpreting trends in weather patterns
+
+3.**⁠ ⁠Sei Sar** – Geospatial Interpolation & Climate Change Impact Analysis
+
+-   Mapping temperature and precipitation changes over time using GIS techniques
+
+-   Interpolation methods like IDW (Inverse Distance Weighting)
+
+-   Analyzing spatial trends and their implications for climate change

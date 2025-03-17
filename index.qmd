@@ -1,8 +1,6 @@
 ---
-title: "ISSS608, Group 7"
+title: "WeatherWatch SG"
 ---
-
-## Project Website for ISSS 608 Visual Analytics and Applications.
 
 ![](images/clipboard-3285200596.png)
 
@@ -10,24 +8,22 @@ title: "ISSS608, Group 7"
 
 [^1]: The above photo was downloaded from <https://www.freepik.com/>
 
-**Project Proposal Summary**
+Climate change is reshaping Singapore’s environment, with rising temperatures, shifting rainfall patterns, and increasing extreme weather events. These changes affect public health, energy consumption, and urban infrastructure. By analyzing historical weather data, we aim to uncover trends and provide valuable insights to help Singapore adapt to a changing climate.
 
-**Motivation & Background**
+The objectives for this project are as follows:
 
-The impact of Climate change is becoming more obvious and is beginning to have a significant impact on our daily lives.  This is especially for Singapore, a tropical island nation facing rising temperatures, increased humidity, frequent extreme weather events, and rising sea levels.  In the past, these changes were subtle but has rapidly led to built-up impact on daily life of Singapore residents. Singapore's mean temperatures have been rising at twice the global average, amplifying urban heat island effects, increasing heat stress risks, and altering precipitation patterns, leading to both flash flood.  This warming trend strains the power grid, may increase transportation costs, resulting significant impacts daily activities. Our project aims to analyse historical weather patterns to understand climate trends and their implications for Singapore's environment and daily life.
+-   **Understanding Climate Trends:** Analyzing temperature, humidity, and precipitation changes over time.
 
-**Objective**
+-   **Public Health Impacts:** Exploring links between climate trends and the rise in vector-borne diseases like dengue.
 
-The project addresses critical issues related to climate change in Singapore by visualizing historical weather data to identify long-term trends. We aim to examine the health impacts of climate change by correlating weather data with records from the National Environment Agency (NEA), focusing on vector-borne diseases like dengue. Understanding these links can help public health authorities implement better preventive measures. We also investigate the impact of rising temperatures on electricity demand and the effects of extreme weather on transportation networks and commuting behaviours. Our goal is to provide actionable insights for policymakers, urban planners, and public health officials to develop effective and holistic climate adaptation and mitigation strategies, enhancing awareness and contributing to a more climate-resilient Singapore.
+-   **Energy Consumption:** Examining the relationship between rising temperatures and electricity demand.
 
-**Data Sets**
+-   **Urban Mobility:** Investigating how weather conditions affect transport patterns, including taxi and ride-hailing demand.
 
-We will integrate multiple data sets from different government agencies, primarily historical weather data from the Meteorological Service Singapore, which includes temperature trends, rainfall patterns, humidity levels, and extreme weather events. Additionally, we will use:
+#### **Key Features**
 
-1.  Electricity consumption statistics from the Energy Market Authority (EMA) to examine the correlation between rising temperatures and increased electricity demand.
+-   **Interactive Data Visualization:** Users can explore climate trends through dynamic charts and geospatial maps.
 
-2.  Dengue case data from the NEA to evaluate public health implications of climate change.
+-   **Correlated Insights:** Integration of multiple datasets (weather, health, energy, and transport) for a holistic analysis.
 
-3.  Private hire vehicle data from the Land Transport Authority (LTA) to analyze how extreme weather events influence commuting behaviors and transport demand.
-
-By combining these data sets, our project aims to provide a comprehensive analysis of how climate change affects various aspects of daily life in Singapore.
+-   **User-Friendly Interface:** Designed for policymakers, researchers, and the public to easily access and interpret climate data.
