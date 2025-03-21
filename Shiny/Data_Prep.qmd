@@ -48,7 +48,7 @@ colnames(weather) <- c("Station", "Year", "Month", "Day",
 
 ## Merging Columns
 
-The columns **`Highest30minRainfall.x`** and **`Highest30minRainfall.y`** need to be merged into a single column. Whenever one of these columns has an `NA` value, the other column will have a valid value, meaning that together they form the complete dataset.
+The columns **`Highest30minRainfall.x`**and **`Highest30minRainfall.y`** need to be merged into a single column. i.e. Whenever one of these columns has an `NA` value, the other column have a valid value, meaning that together they form the complete dataset.
 
 ```{r}
 #| eval: False
