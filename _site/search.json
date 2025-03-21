@@ -222,5 +222,33 @@
     "title": "Overview",
     "section": "6. Prototype",
     "text": "6. Prototype\nClick here to project’s prototype Shiny App."
+  },
+  {
+    "objectID": "Shiny/Data_Prep.html#renaming-variables",
+    "href": "Shiny/Data_Prep.html#renaming-variables",
+    "title": "Data Preparation",
+    "section": "Renaming Variables",
+    "text": "Renaming Variables\n\ncolnames(weather) &lt;- c(\"Station\", \"Year\", \"Month\", \"Day\", \n                            \"DailyRainfall\", \"Highest30minRainfall.x\",\"Highest60minRainfall.x\",\"Highest120minRainfall.x\",\n                          \"MeanTemperature\", \n                            \"MaxTemperature\", \"MinTemperature\", \n                            \"MeanWindSpeed\", \"MaxWindSpeed\", \n                            \"Highest30minRainfall.y\",\"Highest60minRainfall.y\",\"Highest120minRainfall.y\")"
+  },
+  {
+    "objectID": "Shiny/Data_Prep.html#merging-columns",
+    "href": "Shiny/Data_Prep.html#merging-columns",
+    "title": "Data Preparation",
+    "section": "Merging Columns",
+    "text": "Merging Columns\nThe columns Highest30minRainfall.x and Highest30minRainfall.y need to be merged into a single column. Whenever one of these columns has an NA value, the other column will have a valid value, meaning that together they form the complete dataset.\n\n# Merge the columns and replace any remaining NA or \"-\" with 0\nweather &lt;- weather %&gt;%\n  mutate(\n    Highest30minRainfall = coalesce(`Highest30minRainfall.x`, `Highest30minRainfall.y`),\n    Highest60minRainfall = coalesce(`Highest60minRainfall.x`, `Highest60minRainfall.y`),\n    Highest120minRainfall = coalesce(`Highest120minRainfall.x`, `Highest120minRainfall.y`)\n  ) %&gt;%\n  # Convert \"-\" to NA, then replace NA with 0\n  mutate(\n    Highest30minRainfall = as.numeric(Highest30minRainfall), \n    Highest30minRainfall = ifelse(is.na(Highest30minRainfall), 0, Highest30minRainfall),\n    \n    Highest60minRainfall = as.numeric(Highest60minRainfall), \n    Highest60minRainfall = ifelse(is.na(Highest60minRainfall), 0, Highest60minRainfall),\n    \n    Highest120minRainfall = as.numeric(Highest120minRainfall), \n    Highest120minRainfall = ifelse(is.na(Highest120minRainfall), 0, Highest120minRainfall)\n  ) %&gt;%\n  # Drop the original columns\n  select(-c(`Highest30minRainfall.x`, `Highest30minRainfall.y`, \n            `Highest60minRainfall.x`, `Highest60minRainfall.y`, \n            `Highest120minRainfall.x`, `Highest120minRainfall.y`))"
+  },
+  {
+    "objectID": "Shiny/Data_Prep.html#converting-data-type-to-numeric",
+    "href": "Shiny/Data_Prep.html#converting-data-type-to-numeric",
+    "title": "Data Preparation",
+    "section": "Converting data type to numeric",
+    "text": "Converting data type to numeric\n\n# Convert columns 5 to 10 to numeric\nweather[, 5:10] &lt;- lapply(weather[, 5:10], function(x) {\n  as.numeric(x)  # Convert to numeric\n})"
+  },
+  {
+    "objectID": "Shiny/Data_Prep.html#handling-missing-values",
+    "href": "Shiny/Data_Prep.html#handling-missing-values",
+    "title": "Data Preparation",
+    "section": "Handling Missing Values",
+    "text": "Handling Missing Values\nFiltering for rows without all three: mean, max or min temperature.\n\nweather &lt;- weather %&gt;%\n  mutate(\n    MeanTemperature = na_if(MeanTemperature, \"-\"),\n    MaxTemperature = na_if(MaxTemperature, \"-\"),\n    MinTemperature = na_if(MinTemperature, \"-\")\n  )\n\n\nall_na_temp_check &lt;- weather %&gt;% filter(is.na(MeanTemperature) & is.na(MaxTemperature) & is.na(MinTemperature))\nprint(all_na_temp_check)\n\n110587 rows of data missing all three!! how do we handle this\n\nweather&lt;- weather %&gt;% filter(!is.na(MeanTemperature) & !is.na(MaxTemperature) & !is.na(MinTemperature))"
   }
 ]

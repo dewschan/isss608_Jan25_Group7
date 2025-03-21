@@ -12,13 +12,13 @@ execute:
 
 The following document details the data preparation process for the building the prototype for the shiny app of this project assignment.
 
-## Libraries Used for Data Preparation
+# Libraries Used for Data Preparation
 
 ```{r}
-pacman::p_load(tidyverse, readxl)
+pacman::p_load(tidyverse, readxl,SmartEDA)
 ```
 
-## Importing data sets
+# Importing data sets
 
 The climate data set was being scraped from [Meteorological Service Website, Singapore](https://www.weather.gov.sg/climate-historical-daily/) using beautiful soup python package.
 
@@ -29,8 +29,95 @@ weather<- read_csv("data/combined_weather_data.csv")
 ```
 
 ```{r}
-summary(weather)
+weather %>% ExpData(type=2)
 ```
+
+# Data Prep for Weather Data
+
+## Renaming Variables
+
+```{r}
+#| eval: False
+colnames(weather) <- c("Station", "Year", "Month", "Day", 
+                            "DailyRainfall", "Highest30minRainfall.x","Highest60minRainfall.x","Highest120minRainfall.x",
+                          "MeanTemperature", 
+                            "MaxTemperature", "MinTemperature", 
+                            "MeanWindSpeed", "MaxWindSpeed", 
+                            "Highest30minRainfall.y","Highest60minRainfall.y","Highest120minRainfall.y")
+```
+
+## Merging Columns
+
+The columns **`Highest30minRainfall.x`** and **`Highest30minRainfall.y`** need to be merged into a single column. Whenever one of these columns has an `NA` value, the other column will have a valid value, meaning that together they form the complete dataset.
+
+```{r}
+#| eval: False
+# Merge the columns and replace any remaining NA or "-" with 0
+weather <- weather %>%
+  mutate(
+    Highest30minRainfall = coalesce(`Highest30minRainfall.x`, `Highest30minRainfall.y`),
+    Highest60minRainfall = coalesce(`Highest60minRainfall.x`, `Highest60minRainfall.y`),
+    Highest120minRainfall = coalesce(`Highest120minRainfall.x`, `Highest120minRainfall.y`)
+  ) %>%
+  # Convert "-" to NA, then replace NA with 0
+  mutate(
+    Highest30minRainfall = as.numeric(Highest30minRainfall), 
+    Highest30minRainfall = ifelse(is.na(Highest30minRainfall), 0, Highest30minRainfall),
+    
+    Highest60minRainfall = as.numeric(Highest60minRainfall), 
+    Highest60minRainfall = ifelse(is.na(Highest60minRainfall), 0, Highest60minRainfall),
+    
+    Highest120minRainfall = as.numeric(Highest120minRainfall), 
+    Highest120minRainfall = ifelse(is.na(Highest120minRainfall), 0, Highest120minRainfall)
+  ) %>%
+  # Drop the original columns
+  select(-c(`Highest30minRainfall.x`, `Highest30minRainfall.y`, 
+            `Highest60minRainfall.x`, `Highest60minRainfall.y`, 
+            `Highest120minRainfall.x`, `Highest120minRainfall.y`))
+
+```
+
+## Converting data type to numeric
+
+```{r}
+#| eval: False
+# Convert columns 5 to 10 to numeric
+weather[, 5:10] <- lapply(weather[, 5:10], function(x) {
+  as.numeric(x)  # Convert to numeric
+})
+
+```
+
+## Handling Missing Values
+
+Filtering for rows without all three: mean, max or min temperature.
+
+```{r}
+#| eval: False
+weather <- weather %>%
+  mutate(
+    MeanTemperature = na_if(MeanTemperature, "-"),
+    MaxTemperature = na_if(MaxTemperature, "-"),
+    MinTemperature = na_if(MinTemperature, "-")
+  )
+```
+
+```{r}
+#| eval: False
+all_na_temp_check <- weather %>% filter(is.na(MeanTemperature) & is.na(MaxTemperature) & is.na(MinTemperature))
+print(all_na_temp_check)
+
+```
+
+110587 rows of data missing all three!! how do we handle this
+
+```{r}
+#| eval: False
+weather<- weather %>% filter(!is.na(MeanTemperature) & !is.na(MaxTemperature) & !is.na(MinTemperature))
+
+```
+
+# Importing Dengue Data
 
 The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.
 
@@ -83,16 +170,16 @@ print(Monthly_dengue_longer)
 
 ```
 
-## Combining of the temperature and dengue case data
+# Combining of the temperature and dengue case data
 
 ```{r}
 combined_data <- Monthly_dengue_longer %>%   left_join(weather_Monthly, by = c("Year", "Month"))
 ```
 
-## Exporting processed data frames to csv files to be visualised in Shiny App
+# Exporting processed data frames to csv files to be visualised in Shiny App
 
 ```{r}
-
+#| eval: False
 write.csv(Monthly_dengue_longer, file = "C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv", row.names = FALSE)
 
 write.csv(weather_Monthly, file = "C:/dewschan/Grp7_Shiny/data/weather_Monthly.csv", row.names = FALSE)
