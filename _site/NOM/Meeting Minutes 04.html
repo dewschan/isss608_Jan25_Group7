@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN">
-<meta name="dcterms.date" content="2025-03-02">
+<meta name="dcterms.date" content="2025-03-22">
 
-<title>Meeting Minutes 03 – </title>
+<title>Meeting Minutes 04 – </title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Minutes 03</h1>
+<h1 class="title">Meeting Minutes 04</h1>
 </div>
 
 
@@ -172,14 +172,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 2, 2025</p>
+      <p class="date">March 22, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 15, 2025</p>
+      <p class="date-modified">March 22, 2025</p>
     </div>
   </div>
     
@@ -190,145 +190,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Meeting 3</strong>&nbsp;<br>
-Date: 2 March, 2025&nbsp;<br>
-Venue: MS Teams&nbsp;<br>
-Main Agenda: Reviewing datasets, preparing data for analysis, and crafting project proposal&nbsp;</p>
-<p>Key Discussions:&nbsp;</p>
+<p><strong>Meeting 4</strong>&nbsp;<br>
+Date: 22 March, 2025&nbsp;<br>
+Venue: SOE/SCIS2 GSR 2-11&nbsp;<br>
+Main Agenda: Finalizing Analysis Modules for Shiny App, Assigning Tasks to Team Members&nbsp;</p>
+<p><strong>Key Discussions</strong></p>
+<ol type="1">
+<li><p><strong>Finalization of Analysis Modules</strong></p>
 <ul>
-<li>Dataset Review:&nbsp;</li>
+<li><p>The team reviewed the proposed analysis modules and agreed on the following three core areas for the Shiny app:</p>
+<ul>
+<li><p><strong>Exploratory Data Analysis (EDA) &amp; Confirmatory Data Analysis (CDA)</strong>&nbsp;– Statistical insights and hypothesis testing on Singapore’s climate trends.</p></li>
+<li><p><strong>Time Series Forecasting</strong>&nbsp;– Predicting future climate patterns and their potential implications.</p></li>
+<li><p><strong>Geospatial Analysis</strong>&nbsp;– Mapping weather trends and climate variations across different stations.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Assignment of Modules to Team Members</strong></p>
+<ul>
+<li><p>Each team member will be responsible for a specific module, ensuring a structured approach to development:</p>
+<ul>
+<li><p><strong>Stella:</strong> EDA &amp; CDA – Conducting statistical analysis, visualizing trends, and validating insights.</p></li>
+<li><p><strong>Sathvika:</strong>&nbsp;Time Series Forecasting – Developing predictive models, integrating external datasets, and analyzing seasonal trends.</p></li>
+<li><p><strong>Sei Sar:</strong> Geospatial Analysis – Creating interactive maps, analyzing spatial climate trends, and performing geospatial interpolation.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>General Data Preparation</strong></p>
+<ul>
+<li><p>Before working on individual modules, the team emphasized the need for standardized data preparation to ensure smooth integration across components.</p></li>
+<li><p>Common preprocessing tasks were discussed, such as handling missing values, ensuring consistency in date formats, and merging datasets where necessary.</p></li>
+</ul></li>
+</ol>
+<hr>
+<p><strong>To-Do List &amp; Action Items</strong></p>
+<p><strong>Stella:</strong></p>
+<ul>
+<li><p>Scrape latitude and longitude data for weather stations from the Meteorological Service Singapore website.</p></li>
+<li><p>Perform preliminary data cleaning and organization for EDA.</p></li>
+<li><p>Identify key statistical tests for confirmatory analysis.</p></li>
 </ul>
-<!-- -->
+<p><strong>Sathvika:</strong></p>
 <ul>
-<li>Climate Data: Still in the process of crawling the web for lastest data&nbsp;</li>
+<li><p>Join additional datasets (such as dengue cases and electricity consumption) with weather data for time series forecasting.</p></li>
+<li><p>Conduct initial trend analysis to explore relationships between climate variables and external factors.</p></li>
+<li><p>Test different forecasting models (e.g., ARIMA, exponential smoothing) for suitability.</p></li>
 </ul>
-<!-- -->
+<p><strong>Sei Sar:</strong></p>
 <ul>
-<li>Electricity Consumption: Energy usage data, with breakdowns by household and commercial sectors. The team discussed using seasonal decomposition techniques to analyse how consumption patterns change during hotter months.&nbsp;</li>
+<li><p>Finalize general data preparation steps to align the dataset structure with all team members.</p></li>
+<li><p>Ensure location-based weather data is ready for geospatial visualization.</p></li>
+<li><p>Research appropriate GIS techniques for mapping Singapore’s climate trends.</p></li>
 </ul>
-<!-- -->
+<hr>
+<p><strong>Next Steps &amp; Follow-Up</strong></p>
 <ul>
-<li>Health Data: Heat-related illness datasets such as dengue showed in certain months. Preliminary checks indicated that these peaks coincided with periods of higher temperatures.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Transportation Data: LTA ride-hailing and taxi demand data was presented, showing increased trips during hotter periods. This could provide insights into how extreme weather impacts mobility patterns.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Data Preprocessing:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Agreed on the following preprocessing steps:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Standardize time formats across all datasets.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Handle missing values by interpolation for climate data and mean imputation for health and electricity datasets.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Normalize continuous variables to ensure consistent scales across different datasets.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Proposal Crafting:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>The team brainstormed the structure of the project proposal, with the following sections:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Introduction: Overview of climate change and its impacts on public health, electricity consumption, and transportation patterns.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Objective/Research Questions:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>How does climate change affect electricity consumption patterns in Singapore?&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Is there a significant relationship between rising temperatures and heat-related health issues?&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>How do transportation patterns change during extreme weather events?&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Methodology:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Time series visualization using fable and ggplot2.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Correlation analysis between temperature and other datasets.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Data Sources: List of all datasets obtained and their descriptions.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Literature Review: To build on previously done research&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Expected Outcomes/Storyboard: Insights into how climate change impacts daily life and potential recommendations for policymakers.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Project Timeline:&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Week 1: Data collection and preprocessing&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Week 2-3: Exploratory data analysis and visualizations, Correlation analysis and initial findings, Build Shiny-App&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Week 4: Deeper Visualizations with CDA on Shiny-App&nbsp;</li>
-</ul>
-<p>Tasks to Complete:&nbsp;</p>
-<ul>
-<li>Sei Sar: Draft the Introduction and Data Sources sections.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Stella: Write the Methodology section and start creating time series visualizations for climate and electricity data&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Sathvika: Write the Literature Review section.&nbsp;</li>
-</ul>
-<p>Next Meeting Agenda:&nbsp;</p>
-<ul>
-<li>Review first draft of the proposal.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Discuss early visualizations and findings.&nbsp;</li>
-</ul>
-<p>To Do Before Next Meeting:&nbsp;</p>
-<ul>
-<li>Have the first draft of the proposal ready by Mar 9 Sunday night.&nbsp;</li>
-</ul>
-<!-- -->
-<ul>
-<li>Share initial visualizations in the team groupchat for feedback.&nbsp;</li>
+<li><p><strong>Midweek Check-In:</strong> A short follow-up session will be scheduled to discuss data preparation progress.</p></li>
+<li><p><strong>Module Development Begins:</strong> Once data is aligned, team members will start implementing their respective analysis components.</p></li>
+<li><p><strong>Integration &amp; Testing:</strong>&nbsp;The team will coordinate to ensure smooth integration of the different modules within the Shiny app.</p></li>
 </ul>
 
 

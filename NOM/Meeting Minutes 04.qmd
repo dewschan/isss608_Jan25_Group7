@@ -1,0 +1,82 @@
+---
+title: "Meeting Minutes 04"
+author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+date: "2025-03-22"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+**Meeting 4** \
+Date: 22 March, 2025 \
+Venue: SOE/SCIS2 GSR 2-11 \
+Main Agenda: Finalizing Analysis Modules for Shiny App, Assigning Tasks to Team Members 
+
+**Key Discussions**
+
+1.  **Finalization of Analysis Modules**
+
+    -   The team reviewed the proposed analysis modules and agreed on the following three core areas for the Shiny app:
+
+        -   **Exploratory Data Analysis (EDA) & Confirmatory Data Analysis (CDA)** – Statistical insights and hypothesis testing on Singapore’s climate trends.
+
+        -   **Time Series Forecasting** – Predicting future climate patterns and their potential implications.
+
+        -   **Geospatial Analysis** – Mapping weather trends and climate variations across different stations.
+
+2.  **Assignment of Modules to Team Members**
+
+    -   Each team member will be responsible for a specific module, ensuring a structured approach to development:
+
+        -   **Stella:** EDA & CDA – Conducting statistical analysis, visualizing trends, and validating insights.
+
+        -   **Sathvika:** Time Series Forecasting – Developing predictive models, integrating external datasets, and analyzing seasonal trends.
+
+        -   **Sei Sar:** Geospatial Analysis – Creating interactive maps, analyzing spatial climate trends, and performing geospatial interpolation.
+
+3.  **General Data Preparation**
+
+    -   Before working on individual modules, the team emphasized the need for standardized data preparation to ensure smooth integration across components.
+
+    -   Common preprocessing tasks were discussed, such as handling missing values, ensuring consistency in date formats, and merging datasets where necessary.
+
+------------------------------------------------------------------------
+
+**To-Do List & Action Items**
+
+**Stella:**
+
+-   Scrape latitude and longitude data for weather stations from the Meteorological Service Singapore website.
+
+-   Perform preliminary data cleaning and organization for EDA.
+
+-   Identify key statistical tests for confirmatory analysis.
+
+**Sathvika:**
+
+-   Join additional datasets (such as dengue cases and electricity consumption) with weather data for time series forecasting.
+
+-   Conduct initial trend analysis to explore relationships between climate variables and external factors.
+
+-   Test different forecasting models (e.g., ARIMA, exponential smoothing) for suitability.
+
+**Sei Sar:**
+
+-   Finalize general data preparation steps to align the dataset structure with all team members.
+
+-   Ensure location-based weather data is ready for geospatial visualization.
+
+-   Research appropriate GIS techniques for mapping Singapore’s climate trends.
+
+------------------------------------------------------------------------
+
+**Next Steps & Follow-Up**
+
+-   **Midweek Check-In:** A short follow-up session will be scheduled to discuss data preparation progress.
+
+-   **Module Development Begins:** Once data is aligned, team members will start implementing their respective analysis components.
+
+-   **Integration & Testing:** The team will coordinate to ensure smooth integration of the different modules within the Shiny app.

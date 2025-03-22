@@ -6,30 +6,22 @@ title: "The Team"
 
 The **SG ClimateViz** team is developing an interactive application to uncover how climate change influences key aspects of daily life in Singapore, including public health, energy consumption, and urban mobility. By analyzing historical weather data, the platform provides actionable insights to help stakeholders adapt to a changing climate.
 
-To achieve this, **SG ClimateViz** is structured into specialized analysis modules, each led by a team member:
+#### **Stella – Exploratory & Confirmatory Data Analysis (EDA & CDA)**
 
-1.  **Stella – Exploratory & Confirmatory Data Analysis (EDA & CDA)**
+-   **Descriptive Analytics:** Generating summary statistics and visualizations, such as histograms, boxplots, and time-series plots, to reveal climate trends.
 
-    -   Data cleaning and preprocessing to ensure high-quality datasets.
+-   **Statistical Analysis:** Conducting hypothesis testing and confirmatory data analysis to validate key findings on climate variations.
 
-    -   Summary statistics and visualizations (e.g., histograms, boxplots, time-series trends).
+#### **Sathvika – Time Series Forecasting & Trend Analysis**
 
-    -   Hypothesis testing and statistical validation to support key findings.
+-   **Predictive Modeling:** Applying forecasting techniques like ARIMA and exponential smoothing to predict future climate variations.
 
-2.  **Sathvika – Univariate Forecasting & Trend Analysis**
+-   **Performance Evaluation:** Assessing forecast accuracy and interpreting long-term weather patterns to inform climate adaptation strategies.
 
-    -   Time series decomposition to understand seasonality and trends.
+#### **Sei Sar – Geospatial Interpolation & Analysis**
 
-    -   Application of forecasting techniques such as ARIMA to predict climate variations.
+-   **Spatial Climate Mapping:** Visualizing temperature and precipitation changes across different locations using GIS techniques.
 
-    -   Evaluating forecast accuracy and interpreting long-term weather patterns.
-
-3.  **Sei Sar – Geospatial Interpolation & Climate Change Impact Analysis**
-
-    -   Mapping temperature and precipitation changes over time using GIS techniques.
-
-    -   Implementing interpolation methods like Inverse Distance Weighting (IDW) for spatial analysis.
-
-    -   Identifying spatial climate trends and their implications for Singapore’s environment.
+-   **Geospatial Interpolation:** Implementing methods such as Inverse Distance Weighting (IDW) to analyze spatial weather variations.
 
 Together, these modules ensure that **SG ClimateViz** delivers a comprehensive, data-driven understanding of Singapore’s evolving climate.
