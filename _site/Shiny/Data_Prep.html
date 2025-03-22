@@ -187,9 +187,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-prep-for-weather-data" id="toc-data-prep-for-weather-data" class="nav-link" data-scroll-target="#data-prep-for-weather-data">Data Prep for Weather Data</a>
   <ul class="collapse">
   <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables">Renaming Variables</a></li>
+  <li><a href="#adding-date-field" id="toc-adding-date-field" class="nav-link" data-scroll-target="#adding-date-field">Adding Date Field</a></li>
   <li><a href="#merging-columns" id="toc-merging-columns" class="nav-link" data-scroll-target="#merging-columns">Merging Columns</a></li>
   <li><a href="#converting-data-type-to-numeric" id="toc-converting-data-type-to-numeric" class="nav-link" data-scroll-target="#converting-data-type-to-numeric">Converting data type to numeric</a></li>
-  <li><a href="#handling-missing-values" id="toc-handling-missing-values" class="nav-link" data-scroll-target="#handling-missing-values">Handling Missing Values</a></li>
+  <li><a href="#handling-missing-values-not-sure-how-this-will-be-handled" id="toc-handling-missing-values-not-sure-how-this-will-be-handled" class="nav-link" data-scroll-target="#handling-missing-values-not-sure-how-this-will-be-handled">Handling Missing Values (Not sure how this will be handled)</a></li>
   </ul></li>
   <li><a href="#importing-dengue-data" id="toc-importing-dengue-data" class="nav-link" data-scroll-target="#importing-dengue-data">Importing Dengue Data</a></li>
   <li><a href="#combining-of-the-temperature-and-dengue-case-data" id="toc-combining-of-the-temperature-and-dengue-case-data" class="nav-link" data-scroll-target="#combining-of-the-temperature-and-dengue-case-data">Combining of the temperature and dengue case data</a></li>
@@ -226,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 21, 2025</p>
+      <p class="date-modified">March 22, 2025</p>
     </div>
   </div>
     
@@ -304,61 +305,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Highest30minRainfall.y"</span>,<span class="st">"Highest60minRainfall.y"</span>,<span class="st">"Highest120minRainfall.y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="adding-date-field" class="level2">
+<h2 class="anchored" data-anchor-id="adding-date-field">Adding Date Field</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">as.numeric</span>(Year),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Month =</span> <span class="fu">as.numeric</span>(Month),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Day =</span> <span class="fu">as.numeric</span>(Day),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(Year, Month, Day, <span class="at">sep =</span> <span class="st">"-"</span>), <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="merging-columns" class="level2">
 <h2 class="anchored" data-anchor-id="merging-columns">Merging Columns</h2>
-<p>The columns <strong><code>Highest30minRainfall.x</code></strong> and <strong><code>Highest30minRainfall.y</code></strong> need to be merged into a single column. Whenever one of these columns has an <code>NA</code> value, the other column will have a valid value, meaning that together they form the complete dataset.</p>
+<p>The columns <strong><code>Highest30minRainfall.x</code></strong>and <strong><code>Highest30minRainfall.y</code></strong> need to be merged into a single column. i.e.&nbsp;Whenever one of these columns has an <code>NA</code> value, the other column have a valid value, meaning that together they form the complete dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the columns and replace any remaining NA or "-" with 0</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert "-" to NA, then replace NA with 0</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">as.numeric</span>(Highest30minRainfall), </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest30minRainfall), <span class="dv">0</span>, Highest30minRainfall),</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">as.numeric</span>(Highest60minRainfall), </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest60minRainfall), <span class="dv">0</span>, Highest60minRainfall),</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">as.numeric</span>(Highest120minRainfall), </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest120minRainfall), <span class="dv">0</span>, Highest120minRainfall)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop the original columns</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>, </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>, </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the columns and replace any remaining NA or "-" with 0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert "-" to NA, then replace NA with 0</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">as.numeric</span>(Highest30minRainfall), </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest30minRainfall), <span class="dv">0</span>, Highest30minRainfall),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">as.numeric</span>(Highest60minRainfall), </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest60minRainfall), <span class="dv">0</span>, Highest60minRainfall),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">as.numeric</span>(Highest120minRainfall), </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest120minRainfall), <span class="dv">0</span>, Highest120minRainfall)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop the original columns</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>, </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>, </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="converting-data-type-to-numeric" class="level2">
 <h2 class="anchored" data-anchor-id="converting-data-type-to-numeric">Converting data type to numeric</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns 5 to 10 to numeric</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>], <span class="cf">function</span>(x) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(x)  <span class="co"># Convert to numeric</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns 5 to 10 to numeric</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>], <span class="cf">function</span>(x) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(x)  <span class="co"># Convert to numeric</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="handling-missing-values" class="level2">
-<h2 class="anchored" data-anchor-id="handling-missing-values">Handling Missing Values</h2>
+<section id="handling-missing-values-not-sure-how-this-will-be-handled" class="level2">
+<h2 class="anchored" data-anchor-id="handling-missing-values-not-sure-how-this-will-be-handled">Handling Missing Values (Not sure how this will be handled)</h2>
 <p>Filtering for rows without all three: mean, max or min temperature.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">MeanTemperature =</span> <span class="fu">na_if</span>(MeanTemperature, <span class="st">"-"</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemperature =</span> <span class="fu">na_if</span>(MaxTemperature, <span class="st">"-"</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemperature =</span> <span class="fu">na_if</span>(MinTemperature, <span class="st">"-"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">MeanTemperature =</span> <span class="fu">na_if</span>(MeanTemperature, <span class="st">"-"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemperature =</span> <span class="fu">na_if</span>(MaxTemperature, <span class="st">"-"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemperature =</span> <span class="fu">na_if</span>(MinTemperature, <span class="st">"-"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>all_na_temp_check <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MinTemperature))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(all_na_temp_check)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>all_na_temp_check <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MinTemperature))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(all_na_temp_check)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>110587 rows of data missing all three!! how do we handle this</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MinTemperature))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MinTemperature))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -367,12 +380,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.</p>
 <p>The data set is also publicly available on <a href="https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases">NEA website</a> and <a href="https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin">Ministry of Health website.</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Weekly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Weekly"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Monthly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Monthly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Weekly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Weekly"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Monthly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Monthly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Weekly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Weekly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Week                2014              2015              2016      
  Length:54          Min.   :  149.0   Min.   :   91.0   Min.   :   59  
@@ -401,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Monthly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Monthly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Month/Year             2014            2015            2016      
  Length:13          Min.   :  638   Min.   :  521   Min.   :  276  
@@ -427,32 +440,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Mean_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Maximum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Minimum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>weather_Monthly <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Month) <span class="sc">%&gt;%</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">AvgMeanTemp =</span> <span class="fu">mean</span>(Mean_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemp =</span> <span class="fu">max</span>(Maximum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemp =</span> <span class="fu">min</span>(Minimum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Mean_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Maximum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>Minimum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather<span class="sc">$</span><span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>weather_Monthly <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Month) <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">AvgMeanTemp =</span> <span class="fu">mean</span>(Mean_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemp =</span> <span class="fu">max</span>(Maximum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemp =</span> <span class="fu">min</span>(Minimum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer <span class="ot">&lt;-</span> Monthly_dengue <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"denguecases"</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>, <span class="st">"Total"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Year)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Month<span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Month)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Monthly_dengue_longer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer <span class="ot">&lt;-</span> Monthly_dengue <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"denguecases"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>, <span class="st">"Total"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Year)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer<span class="sc">$</span>Month<span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Monthly_dengue_longer<span class="sc">$</span>Month)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Monthly_dengue_longer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 132 × 3
    Month  Year denguecases
@@ -474,17 +487,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="combining-of-the-temperature-and-dengue-case-data" class="level1">
 <h1>Combining of the temperature and dengue case data</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> Monthly_dengue_longer <span class="sc">%&gt;%</span>   <span class="fu">left_join</span>(weather_Monthly, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> Monthly_dengue_longer <span class="sc">%&gt;%</span>   <span class="fu">left_join</span>(weather_Monthly, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exporting-processed-data-frames-to-csv-files-to-be-visualised-in-shiny-app" class="level1">
 <h1>Exporting processed data frames to csv files to be visualised in Shiny App</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(Monthly_dengue_longer, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_Monthly, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/weather_Monthly.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(combined_data, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/combined_data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(Monthly_dengue_longer, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/Monthly_dengue_longer.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_Monthly, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/weather_Monthly.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(combined_data, <span class="at">file =</span> <span class="st">"C:/dewschan/Grp7_Shiny/data/combined_data.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

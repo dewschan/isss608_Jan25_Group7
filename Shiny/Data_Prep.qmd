@@ -46,6 +46,19 @@ colnames(weather) <- c("Station", "Year", "Month", "Day",
                             "Highest30minRainfall.y","Highest60minRainfall.y","Highest120minRainfall.y")
 ```
 
+## Adding Date Field
+
+```{r}
+#| eval: False
+weather <- weather %>%
+  mutate(
+    Year = as.numeric(Year),
+    Month = as.numeric(Month),
+    Day = as.numeric(Day),
+    Date = as.Date(paste(Year, Month, Day, sep = "-"), format = "%Y-%m-%d")
+  )
+```
+
 ## Merging Columns
 
 The columns **`Highest30minRainfall.x`**and **`Highest30minRainfall.y`** need to be merged into a single column. i.e. Whenever one of these columns has an `NA` value, the other column have a valid value, meaning that together they form the complete dataset.
@@ -88,7 +101,7 @@ weather[, 5:10] <- lapply(weather[, 5:10], function(x) {
 
 ```
 
-## Handling Missing Values
+## Handling Missing Values (Not sure how this will be handled)
 
 Filtering for rows without all three: mean, max or min temperature.
 
