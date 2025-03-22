@@ -1,6 +1,7 @@
 ---
 title: "Prototype"
 author: "Sei Sar Hla Kyi, Sathvika Subramanian, Dew Stella Chan"
+format: html
 date: "2025-03-10"
 date-modified: "last-modified"
 execute:
@@ -10,4 +11,6 @@ execute:
   freeze: true
 ---
 
-Click [here](https://dewschan.shinyapps.io/Grp7_Shiny/) to project's prototype Shiny App.
+<iframe src="https://dewschan.shinyapps.io/Grp7_Shiny/" width="100%" height="600px">
+
+</iframe>
