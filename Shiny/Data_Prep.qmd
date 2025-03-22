@@ -101,6 +101,26 @@ weather[, 5:10] <- lapply(weather[, 5:10], function(x) {
 
 ```
 
+## Adding Station Longitude/Latitude - For Geospatial Use
+
+```{r}
+#| eval: False
+stations<- read_csv("data/stations.csv")
+weather <- stations %>%   left_join(weather, by = c("Station"))
+```
+
+Save as rds file.
+
+```{r}
+#| eval: False
+write_rds(weather, file = "data/rds/weather.rds")
+```
+
+```{r}
+#| eval: False
+weather <- read_rds("data/rds/weather.rds")
+```
+
 ## Handling Missing Values (Not sure how this will be handled)
 
 Filtering for rows without all three: mean, max or min temperature.
