@@ -109,6 +109,13 @@ stations<- read_csv("data/stations.csv")
 weather <- stations %>%   left_join(weather, by = c("Station"))
 ```
 
+## Remove rows with no date
+
+```{r}
+#| eval: False
+weather<- weather[!is.na(weather$Date), ]
+```
+
 Save as rds file.
 
 ```{r}

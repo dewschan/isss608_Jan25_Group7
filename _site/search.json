@@ -277,6 +277,13 @@
     "href": "Shiny/Data_Prep.html#adding-station-longitudelatitude---for-geospatial-use",
     "title": "Data Preparation",
     "section": "Adding Station Longitude/Latitude - For Geospatial Use",
-    "text": "Adding Station Longitude/Latitude - For Geospatial Use\n\nstations&lt;- read_csv(\"data/stations.csv\")\nweather &lt;- stations %&gt;%   left_join(weather, by = c(\"Station\"))\n\nSave as rds file.\n\nwrite_rds(weather, file = \"data/rds/weather.rds\")\n\n\nweather &lt;- read_rds(\"data/rds/weather.rds\")"
+    "text": "Adding Station Longitude/Latitude - For Geospatial Use\n\nstations&lt;- read_csv(\"data/stations.csv\")\nweather &lt;- stations %&gt;%   left_join(weather, by = c(\"Station\"))"
+  },
+  {
+    "objectID": "Shiny/Data_Prep.html#remove-rows-with-no-date",
+    "href": "Shiny/Data_Prep.html#remove-rows-with-no-date",
+    "title": "Data Preparation",
+    "section": "Remove rows with no date",
+    "text": "Remove rows with no date\n\nweather&lt;- weather[!is.na(weather$Date), ]\n\nSave as rds file.\n\nwrite_rds(weather, file = \"data/rds/weather.rds\")\n\n\nweather &lt;- read_rds(\"data/rds/weather.rds\")"
   }
 ]
