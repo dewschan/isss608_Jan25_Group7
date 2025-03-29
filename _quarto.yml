@@ -25,6 +25,10 @@ website:
           href: NOM/Meeting Minutes 03.html
         - text: "Meeting Minutes 04"
           href: NOM/Meeting Minutes 04.html
+        - text: "Meeting Minutes 05"
+          href: NOM/Meeting Minutes 04.html
+        - text: "Meeting Minutes 06"
+          href: NOM/Meeting Minutes 06.html
 
 format:
   html:

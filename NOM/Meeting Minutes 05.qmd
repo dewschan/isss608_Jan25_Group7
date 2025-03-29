@@ -1,0 +1,88 @@
+---
+title: "Meeting Minutes 05"
+author: "SEI SAR HLA KYI, SATHVIKA SUBRAMANIAN, DEW STELLA CHAN"
+date: "2025-03-27"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+**Meeting 5**\
+Date: 27 March, 2025\
+**Venue:** MS Teams\
+**Main Agenda:** Progress Review on Analysis Modules, Addressing Challenges, and Next Steps
+
+### **Key Discussions**
+
+#### **Progress Updates on Analysis Modules**
+
+Each team member provided an update on their respective tasks and analysis modules:
+
+-   **Stella: EDA & CDA**
+
+    -   Completed preliminary data cleaning and organization.
+
+    -   Identified key statistical tests for confirmatory analysis and began initial hypothesis testing.
+
+-   **Sathvika: Time Series Forecasting**
+
+    -   Integrated additional datasets (dengue cases, electricity consumption) with weather data.
+
+    -   Conducted initial trend analysis and explored relationships between climate variables and external factors.
+
+-   **Sei Sar: Geospatial Analysis**
+
+    -   Finalized general data preparation to align with all modules.
+
+    -   Ensured location-based weather data is structured for geospatial visualization.
+
+    -   Researched GIS techniques for mapping climate trends and began implementing spatial interpolation methods.
+
+#### **Challenges & Resolutions**
+
+-   **Data Integration Issues**
+
+    -   Some inconsistencies were found in date formats and missing values in external datasets.
+
+    -   Action: Implement a standardized data merging approach and handle missing values with appropriate imputation techniques.
+
+-   **Computational Challenges in Forecasting**
+
+    -   Running ARIMA on large datasets took longer than expected.
+
+    -   Action: Optimize model selection criteria and consider dimensionality reduction techniques if necessary.
+
+-   **Geospatial Data Visualization Complexity**
+
+    -   Challenges in aligning kriging outputs with Singapore’s regional boundaries.
+
+    -   Action: Cross-check GIS mapping with different interpolation methods to refine accuracy.
+
+### **To-Do List & Action Items**
+
+-   **Stella:**
+
+    -   Finalize EDA visualizations and statistical summaries.
+
+    -   Validate confirmatory tests and interpret significant findings.
+
+-   **Sathvika:**
+
+    -   Select the best-performing forecasting model and refine predictions.
+
+    -   Document insights from external factor analysis and forecasting.
+
+-   **Sei Sar:**
+
+    -   Implement spatial analysis with Local Measures of Spatial Autocorrelation such as Local Moran’s I and p-values.
+
+    -   Finalize geospatial mapping and assess climate trends across Singapore.
+
+### **Next Steps & Follow-Up**
+
+-   Team members will enhance and refine their respective components based on feedback.
+
+-   Once individual modules are complete, they will be integrated into the Shiny app for testing and validation.

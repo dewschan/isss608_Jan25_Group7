@@ -285,5 +285,19 @@
     "title": "Data Preparation",
     "section": "Remove rows with no date",
     "text": "Remove rows with no date\n\nweather&lt;- weather[!is.na(weather$Date), ]\n\nSave as rds file.\n\nwrite_rds(weather, file = \"data/rds/weather.rds\")\n\n\nweather &lt;- read_rds(\"data/rds/weather.rds\")"
+  },
+  {
+    "objectID": "NOM/Meeting Minutes 05.html",
+    "href": "NOM/Meeting Minutes 05.html",
+    "title": "Meeting Minutes 05",
+    "section": "",
+    "text": "Meeting 5\nDate: 27 March, 2025\nVenue: MS Teams\nMain Agenda: Progress Review on Analysis Modules, Addressing Challenges, and Next Steps\n\nKey Discussions\n\nProgress Updates on Analysis Modules\nEach team member provided an update on their respective tasks and analysis modules:\n\nStella: EDA & CDA\n\nCompleted preliminary data cleaning and organization.\nIdentified key statistical tests for confirmatory analysis and began initial hypothesis testing.\n\nSathvika: Time Series Forecasting\n\nIntegrated additional datasets (dengue cases, electricity consumption) with weather data.\nConducted initial trend analysis and explored relationships between climate variables and external factors.\n\nSei Sar: Geospatial Analysis\n\nFinalized general data preparation to align with all modules.\nEnsured location-based weather data is structured for geospatial visualization.\nResearched GIS techniques for mapping climate trends and began implementing spatial interpolation methods.\n\n\n\n\nChallenges & Resolutions\n\nData Integration Issues\n\nSome inconsistencies were found in date formats and missing values in external datasets.\nAction: Implement a standardized data merging approach and handle missing values with appropriate imputation techniques.\n\nComputational Challenges in Forecasting\n\nRunning ARIMA on large datasets took longer than expected.\nAction: Optimize model selection criteria and consider dimensionality reduction techniques if necessary.\n\nGeospatial Data Visualization Complexity\n\nChallenges in aligning kriging outputs with Singapore’s regional boundaries.\nAction: Cross-check GIS mapping with different interpolation methods to refine accuracy.\n\n\n\n\n\nTo-Do List & Action Items\n\nStella:\n\nFinalize EDA visualizations and statistical summaries.\nValidate confirmatory tests and interpret significant findings.\n\nSathvika:\n\nSelect the best-performing forecasting model and refine predictions.\nDocument insights from external factor analysis and forecasting.\n\nSei Sar:\n\nImplement spatial analysis with Local Measures of Spatial Autocorrelation such as Local Moran’s I and p-values.\nFinalize geospatial mapping and assess climate trends across Singapore.\n\n\n\n\nNext Steps & Follow-Up\n\nTeam members will enhance and refine their respective components based on feedback.\nOnce individual modules are complete, they will be integrated into the Shiny app for testing and validation."
+  },
+  {
+    "objectID": "NOM/Meeting Minutes 06.html",
+    "href": "NOM/Meeting Minutes 06.html",
+    "title": "Meeting Minutes 06",
+    "section": "",
+    "text": "Meeting 6\nDate: 31 March, 2025\nVenue: MS Teams\nMain Agenda:\n\nKey Discussions"
   }
 ]
