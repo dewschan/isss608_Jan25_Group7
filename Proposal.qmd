@@ -40,13 +40,11 @@ In addition to weather data, we will incorporate a few other data sets with the 
 
 2.Dengue case data from the National Environment Agency (NEA): By correlating dengue incidence rates with weather patterns, we aim to identify trends and evaluate the public health implications of climate change.
 
-3\. Private hire vehicle data from the Land Transport Authority (LTA): We will investigate how extreme weather events influence commuting behaviors and transport demand. Analysing fluctuations in taxi and ride-hailing demand during different weather conditions will provide insights into urban mobility patterns as well.
-
 By combining these data sets, our project will provide a comprehensive analysis of how climate change affects various aspects of everyday life in Singapore.
 
 ## 4. Methodology
 
-![](images/Methodology.png){fig-align="center"}
+![](images/WhatsApp Image 2025-03-31 at 11.10.31_9cd11408.jpg)
 
 ## 5. Literature Review
 

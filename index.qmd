@@ -20,8 +20,6 @@ By leveraging data from the Meteorological Service Singapore and integrating mul
 
 -   **Energy Consumption**: Examine how rising temperatures influence electricity demand and energy efficiency.
 
--   **Urban Mobility**: Investigate how weather conditions affect transport patterns, including taxi and ride-hailing demand.
-
 ### **Key Features**
 
 -   **Interactive Data Visualization**: Explore climate trends through dynamic charts, geospatial maps, and time-series analysis.
