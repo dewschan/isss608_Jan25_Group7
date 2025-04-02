@@ -6,8 +6,8 @@ website:
   
   navbar:
     left:
-      - text: "Overview"
-        href: Proposal.html
+      - text: "Poster"
+        href: Poster.html
       - Team.qmd
       - text: "Shiny App"
         menu:

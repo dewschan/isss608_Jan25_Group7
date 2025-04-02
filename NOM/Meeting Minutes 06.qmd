@@ -11,10 +11,60 @@ execute:
 ---
 
 **Meeting 6**\
-Date: 31 March, 2025\
+Date: 2 April, 2025\
 **Venue:** MS Teams\
-**Main Agenda:**
+**Main Agenda: Finalizing Shiny Codes and Combining Shiny Page to build one cohesive app**
 
-### **Key Discussions**
+### **Key Discussions:**
 
-#### 
+1.  **Shiny Code Finalization:**
+
+    -   Each module owner provided updates on their sections.
+
+    -   Debugging of individual components completed.
+
+    -   Reviewed integration points to ensure seamless merging of all modules.
+
+2.  **Integration of Shiny Pages:**
+
+    -   Ensuring consistency in UI elements across different pages.
+
+    -   Finalizing the navigation flow and interactive elements.
+
+    -   Resolving conflicts between different reactive components.
+
+3.  **Testing and Debugging:**
+
+    -   Cross-checking outputs to ensure alignment with data insights.
+
+    -   Performance testing to optimize app responsiveness.
+
+    -   Addressing any remaining inconsistencies.
+
+    -   Preparing for the final presentation.
+
+------------------------------------------------------------------------
+
+### **To-Do Before Saturday’s Poster Presentation:**
+
+1.  **Complete Integration & Testing:**
+
+    -   Final test run of the entire Shiny app.
+
+    -   Ensure there are no errors or missing elements.
+
+2.  **Backup and Deployment:**
+
+    -   Ensure all codes are pushed to GitHub.
+
+    -   Prepare a backup copy of the app in case of technical issues.
+
+    -   Verify deployment access for smooth demonstration.
+
+------------------------------------------------------------------------
+
+**Next Steps:**
+
+-   Final meeting on Friday (if needed) for last-minute refinements.
+
+-   Ensure all members are aligned on poster content and demo execution.
