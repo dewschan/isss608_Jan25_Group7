@@ -1,5 +1,955 @@
 ---
-title: "Eda"
-format: html
+title: "Exploratory Data Analysis (EDA) and Confirmatory Data Analysis (CDA)"
+author: "Dew Stella Chan"
+date: "2025-03-29"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
 ---
 
+The goal of this exercise is to:
+
+-   perform Exploratory Data Analysis (EDA) and Confirmatory Data Analysis (CDA) on the data sets namely Weather, Dengue Cases and Electricity Consumption.
+
+-   based on the outcome of EDA and CDA to determine the parameters and outputs that will be exposed on the shiny applications and
+
+-   to select appropriate Shiny UI components for exposing the parameters determine above
+
+## Data sets:
+
+The following data sets were used for this exercise:
+
+-   The climate data set was being scraped from [Meteorological Service Website, Singapore](https://www.weather.gov.sg/climate-historical-daily/) using beautiful soup python package.
+
+    The scraped historical daily weather records in Singapore were then combined using python into one csv file and loaded in R Studio.
+
+-   The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.
+
+    The data set is also publicly available on [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
+
+## Libraries:
+
+The following libraries were used for this take home exercise.
+
+```{r}
+pacman::p_load(ggstatsplot, plotly, DT, scales, tidyverse, readxl, SmartEDA, skimr, corrplot, readxl, ggdist, ggridges, ggthemes, colorspace, scales, nortest, easystats, tidymodels)
+```
+
+## Data Preparation Process:
+
+The preliminary data preparation for the data sets were detailed in \[project webpage\] (https://isss608jan25group7.netlify.app/shiny/data_prep).
+
+Using the pre-prepared data, this section will transform the weather data so that EDA and CDA could be performed in the subsequent steps.
+
+For this part of the analysis, it will focus on the time period from 2014 to Jun 2024. This is to aligned to the availability of data time period from other data sets, the dengue data set is available from 2014 to 2024 and electricity consumption is available from 2005 to Jun 2024.
+
+Hence the common period is from **2014 to June 2024**. we would be using this common period.
+
+Although the weather station at Changi has the most completed dataset,
+
+## Weather Data:
+
+The following code chuck is to read the weather data.
+
+```{r}
+#| eval: False
+weather <- read_rds('data/Ex03/rds/weather.rds')
+
+```
+
+```{r}
+#| eval: False
+skim(weather)
+```
+
+The list of the active weather stations are are found in this link: https://www.weather.gov.sg/wp-content/uploads/2024/08/Station_Records.pdf
+
+Based on the above summary table, we noted that there are a lot of missing data. with reference to the weather stations data records, 16 weather stations were selected. The names of the selected weather stations were listed in the code chunk below.
+
+```{r}
+#| eval: False
+filtered_weather <- filter(weather, 
+                           Date >= as.Date("2014-01-01") & 
+                           Date <= as.Date("2024-06-30") & 
+                           Station %in% c('Admiralty','Ang Mo Kio', 'Changi', 
+                                          'Choa Chu Kang (south)', 'Clementi', 
+                                          'East Coast Parkway', 'Jurong (West)', 
+                                          'Marina Barrage','Newton',
+                                          'Paya Lebar', 'Sembawang',
+                                          'Pasir Panjang', 'Seletar',
+                                          'Tai Seng','Tengah','Tuas South'))%>%
+                            filter(MinTemperature >= 15)
+```
+
+Use summary function to view the filtered weather
+
+```{r}
+#| eval: False
+summary (filtered_weather)
+```
+
+The following code chunk is used to aggregate the data together at monthly dimension.
+
+```{r}
+#| eval: False
+weather_Monthly <- filtered_weather %>%
+  group_by(Year, Month) %>%
+  summarize(
+    AvgMeanTemp = mean(MeanTemperature, na.rm = TRUE),
+    MaxTemp = max(MaxTemperature, na.rm = TRUE),
+    MinTemp = min(MinTemperature, na.rm = TRUE),
+    total_rainfall=sum(DailyRainfall,na.rm=TRUE),
+    Highest30minRainfall=max(Highest30minRainfall,na.rm=TRUE),
+    Highest60minRainfall=max(Highest60minRainfall, na.rm=TRUE),
+    Highest120minRainfall=max(Highest120minRainfall, na.rm=TRUE), 
+    DaysAbove35 = sum(MaxTemperature >=35, na.rm = TRUE)
+  )
+
+```
+
+The following code chuck is to aggregate the yearly data together.
+
+2024 data are being dropped as the electricity consumption data for 2024 is incomplete
+
+```{r}
+#| eval: False
+weather_Yearly <- filtered_weather %>%
+  group_by(Year) %>%  # Group by Year only
+  summarize(
+    AvgMeanTemp = mean(MeanTemperature, na.rm = TRUE),
+    MaxTemp = max(MaxTemperature, na.rm = TRUE),        
+    MinTemp = min(MinTemperature, na.rm = TRUE),      
+    total_rainfall = sum(DailyRainfall, na.rm = TRUE),
+    Highest30minRainfall = max(Highest30minRainfall, na.rm = TRUE),
+    Highest60minRainfall = max(Highest60minRainfall, na.rm = TRUE), 
+    Highest120minRainfall = max(Highest120minRainfall, na.rm = TRUE), 
+    DaysAbove35 = sum(MaxTemperature >= 35, na.rm = TRUE)
+  ) %>%
+  filter(Year != 2024)
+```
+
+### Data Preparation for the dengue data
+
+The dengue data set was provided at the courtesy of the National Environment Agency (NEA), Singapore.
+
+The data set is also publicly available on [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
+
+```{r}
+#| eval: False
+Monthly_dengue <-read_xlsx("data/Ex03/Denguecases.xlsx", "Monthly")
+```
+
+The following code is to transform the data to longer format, year and months columns to numeric.
+
+```{r}
+#| eval: False
+Monthly_dengue_longer <- Monthly_dengue %>%
+  pivot_longer(
+    cols = 2:12,
+    names_to = "Year",
+    values_to = "denguecases"
+  ) %>%
+  filter(!str_detect(`Month/Year`, "Total")) %>%
+  rename(Month = `Month/Year`) %>%
+  mutate(
+    Year = as.numeric(Year),
+    Month = as.numeric(Month)
+  )
+
+```
+
+The following code chunk is to derive the yearly dengue cases.
+
+```{r}
+#| eval: False
+yearly_dengue <- Monthly_dengue_longer %>%
+  filter(Year != 2024) %>%
+  group_by(Year) %>%
+  summarise(denguecases=sum(denguecases))
+
+colnames(yearly_dengue)
+```
+
+The population data is available at the following data [link](https://tablebuilder.singstat.gov.sg/statistical-tables/downloadMultiple/LGAA_ptQV0-3AQjZN4FFXw).
+
+Based on the National Centre for Infectious Diseases [article](https://www.ncid.sg/Health-Professionals/Articles/Pages/Epidemic-Dengue-in-Singapore-During-COVID-19-Pandemic.aspx#:~:text=In%20fact%2C%20in%202020%2C%20a,Aedes%20aegypti%20mosquito%20since%202017.), the dengue incidence rate is being normalised by population, and transformed to the number of dengue cases per 100, 000 population.
+
+This is usually only applicable total number of dengue cases reported yearly.
+
+```{r}
+#| eval: False
+population <- read_xlsx("data/Ex03/population.xlsx", "Population")
+population$Year <- as.numeric(population$Year)
+population$Population <- as.numeric(population$Population)
+
+yearly_dengue <- yearly_dengue %>% left_join(population, by = "Year")
+
+yearly_dengue$dengueincidencerate <-yearly_dengue$denguecases/yearly_dengue$Population*100000
+```
+
+### Data Preparation for the Electricity consumption data.
+
+The electricity consumption data set is available at this [link](https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter3).
+
+#### Normalizing the total electricity consumption per household.
+
+The data set were extracted and joined with the number of Households in Singapore. The Households data is available at this [link](https://www.singstat.gov.sg/find-data/search-by-theme/households/households/latest-data).
+
+```{r}
+# Load Monthly electricity data
+Monthly_electricity <- read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Monthly")
+Monthly_electricity$Year <- as.numeric(Monthly_electricity$Year)
+Monthly_electricity$Monthly_Elec_consump <- as.numeric(Monthly_electricity$Monthly_Elec_consump)
+
+# Check column names
+colnames(Monthly_electricity)
+
+# Load Households data
+Households <- read_xlsx("data/Ex03/Households.xlsx", "Households")
+Households$Year <- as.numeric(Households$Year)
+Households$NoofHouseholds <- as.numeric(Households$NoofHouseholds)
+
+# Check column names
+colnames(Households)
+
+# Combine datasets and calculate electricity consumption per household
+Monthly_electricity <- Monthly_electricity %>%
+  left_join(Households, by = "Year") %>%
+  mutate(Monthly_Elec_per_Household = Monthly_Elec_consump / NoofHouseholds)
+```
+
+```{r}
+#| eval: False
+yearly_electricity <-read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Yearly")
+```
+
+```{r}
+# Load yearly electricity data
+yearly_electricity <- read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Yearly")
+yearly_electricity$Year <- as.numeric(yearly_electricity$Year)
+yearly_electricity$Yearly_Elec_consump <- as.numeric(yearly_electricity$Yearly_Elec_consump)
+
+# Load households data
+Households <- read_xlsx("data/Ex03/Households.xlsx", "Households")
+Households$Year <- as.numeric(Households$Year)
+Households$NoofHouseholds <- as.numeric(Households$NoofHouseholds)
+
+# Combine datasets and calculate yearly electricity consumption per household
+yearly_electricity <- yearly_electricity %>%
+  left_join(Households, by = "Year") %>%
+  mutate(
+    Yearly_Elec_per_Household = Yearly_Elec_consump / NoofHouseholds
+  )
+```
+
+### Combining data sets
+
+The code chunks below is for combining the various data sets, both the monthly and the year version will be written to rds.
+
+```{r}
+#| eval: False
+combined_Monthly_data <- Monthly_dengue_longer %>% 
+  left_join(weather_Monthly, by = c("Year", "Month")) %>%
+  left_join(Monthly_electricity, by = c("Year", "Month"))%>%
+  filter(!is.na(Monthly_Elec_consump))  %>%
+  select(-NoofHouseholds)
+
+```
+
+```{r}
+#| eval: False
+write_rds(combined_Monthly_data, file = "data/Ex03/rds/combined_Monthly_data.rds")
+```
+
+```{r}
+combined_Monthly_data <- read_rds("data/Ex03/rds/combined_Monthly_data.rds")
+```
+
+```{r}
+#| eval: False
+combined_Yearly_data <- yearly_dengue %>% 
+  left_join(weather_Yearly, by = c("Year")) %>%
+  left_join(yearly_electricity, by = c("Year"))%>%
+  select(-Population, -NoofHouseholds)
+```
+
+```{r}
+#| eval: False
+write_rds(combined_Yearly_data, file = "data/Ex03/rds/combined_Yearly_data.rds")
+```
+
+```{r}
+combined_Yearly_data <- read_rds("data/Ex03/rds/combined_Yearly_data.rds")
+```
+
+## Exploratory Data Analysis (EDA) and Confirmatory Data Analysis (CDA)
+
+### Yearly Trend
+
+To start of EDA, this exercise used the yearly data to explore the overall trends on the variables. This will be useful to provide the preliminary understanding on how climate change has impacted the local weather parameters, health (represented by dengue cases) and household consumption represented by electricity.
+
+#### Yearly Trends on Temperature
+
+```{r}
+
+# Reshape the data for columns 3 to 5
+yearly_combined_data <- combined_Yearly_data %>%
+  select(Year, AvgMeanTemp, MaxTemp, MinTemp) %>%
+  pivot_longer(cols = 2:4, names_to = "Variable", values_to = "Value")  # Convert to long format
+
+# Plot with trend lines for each variable
+ggplot(yearly_combined_data, aes(x = Year, y = Value, color = Variable)) +
+  geom_point(alpha = 0.6, size = 3) +  # Scatter plot points
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) +  # Linear trend line
+  labs(
+    title = "Yearly Trends in Temperature Variables",
+    x = "Year",
+    y = "Value",
+    color = "Variable"
+  ) +
+  theme_minimal()
+```
+
+#### 
+
+```{r}
+
+ggplot(combined_Yearly_data, aes(x = Year, y = MaxTemp)) +
+  geom_point(alpha = 0.6, size = 3) +  # Scatter plot points
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) +  # Linear trend line
+  labs(
+    title = "Yearly Trends in Max Temperature",
+    x = "Year",
+    y = "Max Temp"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = DaysAbove35)) +
+  geom_point(alpha = 0.6, size = 3) +  # Scatter plot points
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) +  
+  labs(
+    title = "Yearly Trends in No. of days above 35",
+    x = "Year",
+    y = "Days Above 35 degree"
+  ) +
+  theme_minimal()
+```
+
+#### Yearly Trends on Rainfall
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = total_rainfall)) +
+  geom_point(alpha = 0.6, size = 3) +  # Scatter plot points
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) + 
+  labs(
+    title = "Yearly Trends in Total Rainfall",
+    x = "Year",
+    y = "Total Rainfall (mm)"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = Highest30minRainfall)) +
+  geom_point(alpha = 0.6, size = 3) + 
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) + 
+  labs(
+    title = "Yearly Trends in Highest Rainfall in 30 minutes",
+    x = "Year",
+    y = "Highest 30 min Rainfall"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = dengueincidencerate)) +
+  geom_point(alpha = 0.6, size = 3) + 
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) + 
+  labs(
+    title = "Yearly Trends in Dengue Incidence Rate",
+    x = "Year",
+    y = " Dengue Incidence Rate"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = Yearly_Elec_consump)) +
+  geom_point(alpha = 0.6, size = 3) + 
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) + 
+  labs(
+    title = "Yearly Trends in Electricity Consumption",
+    x = "Year",
+    y = " Total Yearly dElectricity Consumption"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Yearly_data, aes(x = Year, y = DaysAbove35)) +
+  geom_point(alpha = 0.6, size = 3) + 
+  geom_smooth(method = "lm", linetype = "dashed", size = 1) + 
+  labs(
+    title = "Yearly Trends in DaysAbove35",
+    x = "Year",
+    y = " Total No. of days above 35 Degree"
+  ) +
+  theme_minimal()
+```
+
+### Distribution of of the data
+
+#### Histograms
+
+```{r}
+long_data <- combined_Monthly_data %>%
+  pivot_longer(cols = where(is.numeric), names_to = "Variable", values_to = "Value")
+
+# Create faceted histogram for all continuous variables
+ggplot(long_data, aes(x = Value)) + 
+  geom_histogram(binwidth =1, fill = "lightblue", color = "black", alpha = 0.7) +
+  theme_minimal() +
+  facet_wrap(~ Variable, scales = "free") +
+  labs(title = "Histograms of All Continuous Variables", x = "Value", y = "Frequency")
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = total_rainfall)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$total_rainfall, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$total_rainfall, na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Total Rainfall", y = "Density") +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Highest30minRainfall)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$Highest30minRainfall, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$Highest30minRainfall
+                                                , na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Highest 30min Rainfall", y = "Density") +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Highest60minRainfall)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$Highest60minRainfall, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$Highest60minRainfall, na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Highest 60min Rainfall", y = "Density") +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Highest120minRainfall)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$Highest120minRainfall, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$Highest120minRainfall, na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Highest 120min Rainfall", y = "Density") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Monthly_Elec_consump)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$Monthly_Elec_consump, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$Monthly_Elec_consump, na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Monthly Electricity Consumption", y = "Density") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = denguecases)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean(combined_Monthly_data$denguecases, na.rm = TRUE), 
+                                         sd = sd(combined_Monthly_data$denguecases, na.rm = TRUE)), 
+                color = "red", size = 1) +
+  labs(title = "Histogram with Normal Curve", x = "Dengue cases", y = "Density") +
+  theme_minimal()
+```
+
+```{r}
+summary (combined_Monthly_data)
+```
+
+### Correlation between the various variables.
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+ggstatsplot::ggcorrmat(
+  data = combined_Monthly_data, 
+  cor.vars = 3:13)
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+ggstatsplot::ggcorrmat(
+  data = combined_Yearly_data, 
+  cor.vars = 2:13)
+```
+
+::: callout-note
+Based on the correlation plot, it is noted for the yearly data there is no correlation between the yearly data across all variables.
+:::
+
+### Distribution of the data
+
+### Ridge lines of variables
+
+```{r}
+combined_Monthly_data$Year <- as.factor(combined_Monthly_data$Year)
+
+ggplot(combined_Monthly_data, 
+       aes(x = AvgMeanTemp, 
+           y = Year)) +  # Ensure 'Year' is correctly mapped to y-axis
+  geom_density_ridges(
+    scale = 3,
+    rel_min_height = 0.01,
+    bandwidth = 3.4,
+    fill = lighten("#7097BB", 0.3),  # Adjust fill color
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "Monthly Mean Temperature",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(
+    name = NULL, 
+    expand = expansion(add = c(0.2, 2.6))
+  ) +
+  theme_ridges()
+```
+
+```{r}
+
+# Perform both Shapiro-Wilk and Anderson-Darling tests for each year
+normality_results <- combined_Monthly_data %>%
+  group_by(Year) %>%
+  summarise(
+    Shapiro_p = shapiro.test(AvgMeanTemp)$p.value,  # Shapiro-Wilk test p-value
+    Anderson_p = ad.test(AvgMeanTemp)$p.value      # Anderson-Darling test p-value
+  ) %>%
+  mutate(
+    Shapiro_Result = ifelse(Shapiro_p > 0.05, "Normal", "Not Normal"),  # Interpretation
+    Anderson_Result = ifelse(Anderson_p > 0.05, "Normal", "Not Normal")  # Interpretation
+  )
+
+# View combined results
+print(normality_results)
+```
+
+```{r}
+ggplot(combined_Monthly_data, 
+       aes(x = MaxTemp, 
+           y = Year)) + 
+  geom_density_ridges(
+    scale = 3,
+    rel_min_height = 0.01,
+    bandwidth = 3.4,
+    fill = lighten("#7097BB", 0.3),  
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "Monthly Max Temperature",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(
+    name = NULL, 
+    expand = expansion(add = c(0.2, 2.6))
+  ) +
+  theme_ridges()
+```
+
+```{r}
+# Perform both Shapiro-Wilk and Anderson-Darling tests for each year
+normality_results <- combined_Monthly_data %>%
+  group_by(Year) %>%
+  summarise(
+    Shapiro_p = shapiro.test(MaxTemp)$p.value,  # Shapiro-Wilk test p-value
+    Anderson_p = ad.test(MaxTemp)$p.value      # Anderson-Darling test p-value
+  ) %>%
+  mutate(
+    Shapiro_Result = ifelse(Shapiro_p > 0.05, "Normal", "Not Normal"),  # Interpretation
+    Anderson_Result = ifelse(Anderson_p > 0.05, "Normal", "Not Normal")  # Interpretation
+  )
+
+# View combined results
+print(normality_results)
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, 
+       aes(x = MinTemp, 
+           y = Year)) + 
+  geom_density_ridges(
+    scale = 3,
+    rel_min_height = 0.01,
+    bandwidth = 3.4,
+    fill = lighten("#7097BB", 0.3),  
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "Monthly Min Temperature",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(
+    name = NULL, 
+    expand = expansion(add = c(0.2, 2.6))
+  ) +
+  theme_ridges()
+```
+
+```{r}
+# Perform both Shapiro-Wilk and Anderson-Darling tests for each year
+normality_results <- combined_Monthly_data %>%
+  group_by(Year) %>%
+  summarise(
+    Shapiro_p = shapiro.test(MinTemp)$p.value,  # Shapiro-Wilk test p-value
+    Anderson_p = ad.test(MinTemp)$p.value      # Anderson-Darling test p-value
+  ) %>%
+  mutate(
+    Shapiro_Result = ifelse(Shapiro_p > 0.05, "Normal", "Not Normal"),  # Interpretation
+    Anderson_Result = ifelse(Anderson_p > 0.05, "Normal", "Not Normal")  # Interpretation
+  )
+
+# View combined results
+print(normality_results)
+```
+
+### Analysis of Variance: Parametric and Non-Parametric Methods
+
+```{r}
+combined_Monthly_data$total_rainfall <- as.numeric(combined_Monthly_data$total_rainfall)
+combined_Monthly_data <- combined_Monthly_data %>%
+  filter(!is.na(total_rainfall))
+```
+
+```{r}
+#| fig-height: 12
+#| fig-width: 10
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = total_rainfall, 
+  type = "np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+
+```
+
+```{r}
+#| fig-height: 12
+#| fig-width: 10
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = total_rainfall, 
+  type = "np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = total_rainfall, 
+  type = "np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = FALSE, # Perform pairwise tests
+  pairwise.display = "none",
+  messages = FALSE  # Suppress additional messages
+)
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = MaxTemp, 
+  type = "p",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = DaysAbove35, 
+  type = "np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+
+```
+
+```{r}
+
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = AvgMeanTemp, 
+  type = "p",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = denguecases , 
+  type = "Np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = denguecases , 
+  type = "Np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = FALSE, # Perform pairwise tests
+  pairwise.display = "none",
+  messages = FALSE  # Suppress additional messages
+)
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = Monthly_Elec_consump, 
+  type = "np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = TRUE,  # Perform pairwise tests
+  pairwise.display = "significant",  # Show only significant pairs
+  p.adjust.method = "fdr",  # Adjust for multiple comparisons
+  messages = FALSE  # Suppress additional messages
+)
+```
+
+```{r}
+ggbetweenstats(
+  data = combined_Monthly_data,
+  x = Year, 
+  y = Monthly_Elec_consump , 
+  type = "Np",  # Non-Parametric ANOVA, Parameteric - p
+  mean.ci = TRUE,  # Display mean and confidence interval
+  pairwise.comparisons = FALSE, # Perform pairwise tests
+  pairwise.display = "none",
+  messages = FALSE  # Suppress additional messages
+)
+```
+
+### Multi-Linear Regression (MLR)
+
+#### Using MLR to understand the impact of climate change on health aspect
+
+```{r}
+colnames(combined_Monthly_data)
+```
+
+```{r}
+model_health <- lm(denguecases ~ MaxTemp + MinTemp + AvgMeanTemp+ Highest30minRainfall+ Highest60minRainfall + Highest120minRainfall+DaysAbove35 , data = combined_Monthly_data)
+summary(model_health)
+
+
+```
+
+```{r}
+check_collinearity(model_health)
+```
+
+```{r}
+check_c_health <- check_collinearity(model_health)
+plot(check_c_health)
+```
+
+##### Model Refinement
+
+Highest Rainfall in 60 min data was removed due to multi-collinearity.
+
+Based on the outcome of the initial model, it shows that the increase in dengue cases could not be explained by weather parameters. The correlation plot shows that dengue cases has correlation with electricity consumption.
+
+Hence fo r model refinement, it is added to the model as a variable. The model become significant with highest 30 mins rainfall explaining the increasing trend dengue cases.
+
+```{r}
+model_health <- lm(denguecases ~ MaxTemp + MinTemp + AvgMeanTemp+ Highest30minRainfall + Highest120minRainfall + Monthly_Elec_consump + DaysAbove35 , data = combined_Monthly_data)
+
+summary(model_health)
+```
+
+```{r}
+#| fig-height: 18
+#| fig-width: 16
+check_model(model_health)
+```
+
+#### Using MLR to understand the impact of climate change on electricity consumption
+
+```{r}
+model_elec <- lm(Monthly_Elec_consump ~ MaxTemp + MinTemp + AvgMeanTemp+ Highest30minRainfall+ Highest60minRainfall + Highest120minRainfall+DaysAbove35, data = combined_Monthly_data)
+
+summary(model_elec)
+```
+
+```{r}
+check_c_elec <- check_collinearity(model_elec)
+plot(check_c_elec)
+```
+
+```{r}
+model_elec <- lm(Monthly_Elec_consump ~ MaxTemp + MinTemp + AvgMeanTemp+ Highest30minRainfall + Highest120minRainfall + DaysAbove35 , data = combined_Monthly_data)
+
+summary(model_elec)
+```
+
+```{r}
+#| fig-height: 18
+#| fig-width: 16
+check_model(model_elec)
+```
+
+### Conclusion and further visualization
+
+Although the MLR models may not be able to explain fully on the increase in the dengue cases and household electricity consumption over the year using the weather parameters, but the MLR models met the requirements for this exercise. The use of MLR technique is to use the weather parameters to explore if there were trends between changing weather patterns and its impact on our daily life.
+
+#### Climate Change on Health
+
+Using the outcome of the 1st MLR model on health, although the P-value is at 0.05 which close to the conventional threshold of 0.05, this indicate the model is marginally significant, and suggest that the weather parameters used as a group does not provide a strong explanation of explaining the increase in dengue cases over the recent years.
+
+However it is important to note that among the weather parameters, Average Mean Temperature for the month and the highest 30 min rainfall are statically significant in the first model and only the highest rainfall 30 minutes is still statically significant for explaining the dengue trend after adding in the monthly total electricity consumption.
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = AvgMeanTemp, y = denguecases)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Dengue Cases \nand Average Mean Temperature ",
+    x = "Average Daily Mean Temperature (Monthly)",
+    y = "Dengue Cases"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Highest30minRainfall, y = denguecases)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Dengue Cases \nand Highest 30 min Rainfall ",
+    x = "Highest 30 min Rainfall",
+    y = "Dengue Cases"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Monthly_Elec_consump, y = denguecases)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Dengue Cases \nand Electricity Consumption",
+    x = "Monthly Household Electricity Consumption",
+    y = "Dengue Cases"
+  ) +
+  theme_minimal()
+```
+
+**Climate Change on Electricity Consumption**
+
+Based on the MLR regression models built for the Household Electricity Consumption, the statistically significant variables are Average Mean Temperature, Highest 120 min Rainfall and Minimum Temperature. Hence the following visualization are used to show their relationship.
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = AvgMeanTemp, y = Monthly_Elec_consump)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Electricity Consumption \nand Average Mean Temperature ",
+    x = "Average Daily Mean Temperature (Monthly)",
+    y = "Monthly Household Electricity Consumption"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = Highest120minRainfall, y = Monthly_Elec_consump)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Electricity Consumption \nand Highest 120 min Rainfall",
+    x = "Highest 120 min Rainfall",
+    y = "Monthly Household Electricity Consumption"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(combined_Monthly_data, aes(x = MinTemp, y = Monthly_Elec_consump)) +
+  geom_point(color = "blue", alpha = 0.6, size = 3) +  # Scatter plot with points
+  geom_smooth(method = "lm", color = "red", linetype = "dashed") +  # Linear trend line
+  labs(
+    title = "Relationship Between Electricity Consumption \nand Minimum Temperature",
+    x = "Minimum Temperature",
+    y = "Monthly Household Electricity Consumption"
+  ) +
+  theme_minimal()
+```
+
+### Disclaimer
+
+This take home exercise was done with reference to methods in Prof Kam's e textbook https://r4va.netlify.app/ , materials on R available online and the use of Microsoft co-pilot to troubleshoot syntax errors and streamline codes.
