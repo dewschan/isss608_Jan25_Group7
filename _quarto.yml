@@ -6,15 +6,23 @@ website:
   
   navbar:
     left:
-      - Team.qmd
       - text: "Poster"
         href: Poster.html
-      - text: "Data Preparation"
-        href: Shiny/Data_Prep.html
+      - text: "Prototypes"
+        menu:
+        - text: "Data Preparation"
+          href: Shiny/Data_Prep.html
+        - text: "EDA & CDA"
+          href: Prototypes/Eda.html
+        - text: "Time Series Forecasting"
+          href: Prototypes/Time.html
+        - text: "Geospatial Analysis"
+          href: Prototypes/Geo.html
       - text: "Shiny App"
         href: Shiny/Prototype.html
-      - text: "Meeting Minutes"
+      - text: "Team"
         menu:
+        - Team.qmd
         - text: "Meeting Minutes 01"
           href: NOM/Meeting Minutes 01.html
         - text: "Meeting Minutes 02"
