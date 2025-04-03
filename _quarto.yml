@@ -6,15 +6,13 @@ website:
   
   navbar:
     left:
+      - Team.qmd
       - text: "Poster"
         href: Poster.html
-      - Team.qmd
+      - text: "Data Preparation"
+        href: Shiny/Data_Prep.html
       - text: "Shiny App"
-        menu:
-        - text: "Data Preparation"
-          href: Shiny/Data_Prep.html
-        - text: "Prototype"
-          href: Shiny/Prototype.html
+        href: Shiny/Prototype.html
       - text: "Meeting Minutes"
         menu:
         - text: "Meeting Minutes 01"
