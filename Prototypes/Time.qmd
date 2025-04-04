@@ -835,10 +835,8 @@ This suggests that ETS may better capture the underlying time series patterns, p
 
 The lower errors from ETS indicate more accurate and stable forecasts, making it a more reliable choice in this context.
 
-<<<<<<< HEAD
 While ARIMA remains a flexible model for handling noise and irregularities, in this case, ETS offers both superior accuracy and simplicity, especially for climate-related and consumption data that exhibit seasonality.
 
 These results support the idea that ETS is well-suited for structured, seasonal data, while ARIMA may still be useful for more irregular or highly autocorrelated series. The final model choice should consider both accuracy and the specific characteristics of the variable being forecasted.
-=======
+
 These results support the idea that ARIMA is more adaptable to non-linear patterns often found in climate-related and consumption variables, while ETS remains strong for seasonal data with stable trends. Model choice may ultimately depend on the complexity of the variable and the forecasting context.
->>>>>>> aa553127cf96e15fb90966718aef1040c8626031
