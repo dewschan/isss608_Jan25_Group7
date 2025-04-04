@@ -10,7 +10,7 @@ website:
         href: Poster.html
       - text: "Prototypes"
         menu:
-        - text: "Data Preparation"
+        - text: "General Data Preparation"
           href: Shiny/Data_Prep.html
         - text: "EDA & CDA"
           href: Prototypes/Eda.html
