@@ -836,4 +836,3 @@ The bar plot presents a side-by-side comparison of forecast accuracy between ETS
 -   The performance gap, however, is not large, which means ETS remains a valid and practical alternative—particularly when simplicity, speed, or interpretability is more critical than slight improvements in accuracy.
 
 These results support the idea that ARIMA is more adaptable to non-linear patterns often found in climate-related and consumption variables, while ETS remains strong for seasonal data with stable trends. Model choice may ultimately depend on the complexity of the variable and the forecasting context.
-
