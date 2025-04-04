@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sathvika Subramanian">
+<meta name="dcterms.date" content="2025-03-27">
 
-<title>Time – </title>
+<title>Take Home Exercise 3 – </title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -35,10 +71,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -165,23 +201,77 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">1. Getting Started</a></li>
+  <li><a href="#data-prepartion" id="toc-data-prepartion" class="nav-link" data-scroll-target="#data-prepartion">2. Data Prepartion</a></li>
+  <li><a href="#data-prep-for-weather-data" id="toc-data-prep-for-weather-data" class="nav-link" data-scroll-target="#data-prep-for-weather-data">3. Data Prep for Weather Data</a>
+  <ul class="collapse">
+  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables">Renaming Variables</a></li>
+  <li><a href="#merging-columns" id="toc-merging-columns" class="nav-link" data-scroll-target="#merging-columns">Merging Columns</a></li>
+  <li><a href="#converting-data-type-to-numeric" id="toc-converting-data-type-to-numeric" class="nav-link" data-scroll-target="#converting-data-type-to-numeric">Converting data type to numeric</a></li>
+  <li><a href="#handling-missing-values" id="toc-handling-missing-values" class="nav-link" data-scroll-target="#handling-missing-values">Handling Missing Values</a></li>
+  <li><a href="#filtering-only-changi-station-from-weather-data" id="toc-filtering-only-changi-station-from-weather-data" class="nav-link" data-scroll-target="#filtering-only-changi-station-from-weather-data">Filtering only Changi Station from weather data</a></li>
+  <li><a href="#importing-dengue-data" id="toc-importing-dengue-data" class="nav-link" data-scroll-target="#importing-dengue-data">Importing Dengue Data</a></li>
+  <li><a href="#electricity-data-preparing-from-t3.5-sheet---monthly-electricity-consumption-by-planning-area-dwelling-type-2005-2024" id="toc-electricity-data-preparing-from-t3.5-sheet---monthly-electricity-consumption-by-planning-area-dwelling-type-2005-2024" class="nav-link" data-scroll-target="#electricity-data-preparing-from-t3.5-sheet---monthly-electricity-consumption-by-planning-area-dwelling-type-2005-2024">Electricity Data Preparing from T3.5 Sheet - Monthly Electricity Consumption by Planning Area &amp; Dwelling Type, 2005 – 2024</a></li>
+  <li><a href="#combining-all-datasets" id="toc-combining-all-datasets" class="nav-link" data-scroll-target="#combining-all-datasets">Combining all Datasets</a></li>
+  <li><a href="#removing-duplicates-columns" id="toc-removing-duplicates-columns" class="nav-link" data-scroll-target="#removing-duplicates-columns">Removing Duplicates columns</a></li>
+  </ul></li>
+  <li><a href="#time-series-forecasting" id="toc-time-series-forecasting" class="nav-link" data-scroll-target="#time-series-forecasting">4. Time Series Forecasting</a>
+  <ul class="collapse">
+  <li><a href="#seasonal-subseries-plots-all-variables" id="toc-seasonal-subseries-plots-all-variables" class="nav-link" data-scroll-target="#seasonal-subseries-plots-all-variables">4.1 Seasonal &amp; Subseries Plots (All variables)</a></li>
+  <li><a href="#dengue-cases" id="toc-dengue-cases" class="nav-link" data-scroll-target="#dengue-cases">4.2 Dengue Cases</a>
+  <ul class="collapse">
+  <li><a href="#time-series-decomposition-of-dengue-cases-acf-stl-classical" id="toc-time-series-decomposition-of-dengue-cases-acf-stl-classical" class="nav-link" data-scroll-target="#time-series-decomposition-of-dengue-cases-acf-stl-classical">4.2.1 Time Series Decomposition of Dengue Cases (ACF, STL, Classical)</a></li>
+  <li><a href="#ets-forecasting-of-dengue-cases" id="toc-ets-forecasting-of-dengue-cases" class="nav-link" data-scroll-target="#ets-forecasting-of-dengue-cases">4.2.2 ETS Forecasting of Dengue Cases</a></li>
+  <li><a href="#arima-forecasting-comparison-with-ets" id="toc-arima-forecasting-comparison-with-ets" class="nav-link" data-scroll-target="#arima-forecasting-comparison-with-ets">4.2.3 ARIMA Forecasting + Comparison with ETS</a></li>
+  <li><a href="#forecast-plots-for-ets-vs-arima" id="toc-forecast-plots-for-ets-vs-arima" class="nav-link" data-scroll-target="#forecast-plots-for-ets-vs-arima">4.2.4 Forecast Plots for ETS vs ARIMA</a></li>
+  </ul></li>
+  <li><a href="#decomposition-of-all-variables-trend-seasonality" id="toc-decomposition-of-all-variables-trend-seasonality" class="nav-link" data-scroll-target="#decomposition-of-all-variables-trend-seasonality">4.3 Decomposition of All Variables (Trend + Seasonality)</a></li>
+  <li><a href="#trend-exploration-between-variables" id="toc-trend-exploration-between-variables" class="nav-link" data-scroll-target="#trend-exploration-between-variables">4.4 Trend Exploration Between Variables</a></li>
+  <li><a href="#cross-correlation-ccf-to-explore-lag-effects" id="toc-cross-correlation-ccf-to-explore-lag-effects" class="nav-link" data-scroll-target="#cross-correlation-ccf-to-explore-lag-effects">4.5 Cross-correlation (CCF) to Explore Lag Effects</a></li>
+  <li><a href="#build-forecasting-models-for-weather-electricity" id="toc-build-forecasting-models-for-weather-electricity" class="nav-link" data-scroll-target="#build-forecasting-models-for-weather-electricity">4.6 Build Forecasting Models for Weather &amp; Electricity</a></li>
+  <li><a href="#accuracy-comparison-for-weather-forecasts" id="toc-accuracy-comparison-for-weather-forecasts" class="nav-link" data-scroll-target="#accuracy-comparison-for-weather-forecasts">4.7 Accuracy Comparison for Weather Forecasts</a></li>
+  <li><a href="#forecast-comparison-arima-vs-ets-rainfall-electricity-only" id="toc-forecast-comparison-arima-vs-ets-rainfall-electricity-only" class="nav-link" data-scroll-target="#forecast-comparison-arima-vs-ets-rainfall-electricity-only">4.8 Forecast Comparison: ARIMA vs ETS (Rainfall &amp; Electricity Only)</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Time</h1>
+<h1 class="title">Take Home Exercise 3</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sathvika Subramanian </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 27, 2025</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 5, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -190,8 +280,951 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="getting-started" class="level1">
+<h1>1. Getting Started</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, lubridate, tsibble, feasts, fable, fabletools, data.table, ggthemes, scales, viridis, gridExtra, knitr, readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-prepartion" class="level1">
+<h1>2. Data Prepartion</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/combined_weather_data.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Monthly_dengue <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Monthly"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>electricity_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/electricityconsumption.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T3.5"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-prep-for-weather-data" class="level1">
+<h1>3. Data Prep for Weather Data</h1>
+<section id="renaming-variables" class="level2">
+<h2 class="anchored" data-anchor-id="renaming-variables">Renaming Variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(weather) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Station"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"DailyRainfall"</span>, <span class="st">"Highest30minRainfall.x"</span>,<span class="st">"Highest60minRainfall.x"</span>,<span class="st">"Highest120minRainfall.x"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"MeanTemperature"</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MaxTemperature"</span>, <span class="st">"MinTemperature"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MeanWindSpeed"</span>, <span class="st">"MaxWindSpeed"</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Highest30minRainfall.y"</span>,<span class="st">"Highest60minRainfall.y"</span>,<span class="st">"Highest120minRainfall.y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="merging-columns" class="level2">
+<h2 class="anchored" data-anchor-id="merging-columns">Merging Columns</h2>
+<p>The columns <strong><code>Highest30minRainfall.x</code></strong>and <strong><code>Highest30minRainfall.y</code></strong> need to be merged into a single column. i.e.&nbsp;Whenever one of these columns has an <code>NA</code> value, the other column have a valid value, meaning that together they form the complete dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the columns and replace any remaining NA or "-" with 0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert "-" to NA, then replace NA with 0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">as.numeric</span>(Highest30minRainfall), </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest30minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest30minRainfall), <span class="dv">0</span>, Highest30minRainfall),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">as.numeric</span>(Highest60minRainfall), </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest60minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest60minRainfall), <span class="dv">0</span>, Highest60minRainfall),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">as.numeric</span>(Highest120minRainfall), </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Highest120minRainfall =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Highest120minRainfall), <span class="dv">0</span>, Highest120minRainfall)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop the original columns</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Highest30minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest30minRainfall.y</span><span class="st">`</span>, </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest60minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest60minRainfall.y</span><span class="st">`</span>, </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest120minRainfall.x</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest120minRainfall.y</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="converting-data-type-to-numeric" class="level2">
+<h2 class="anchored" data-anchor-id="converting-data-type-to-numeric">Converting data type to numeric</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns 5 to 10 to numeric</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(weather[, <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>], <span class="cf">function</span>(x) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(x)  <span class="co"># Convert to numeric</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="handling-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="handling-missing-values">Handling Missing Values</h2>
+<p>Filtering for rows without all three: mean, max or min temperature.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">MeanTemperature =</span> <span class="fu">na_if</span>(MeanTemperature, <span class="st">"-"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemperature =</span> <span class="fu">na_if</span>(MaxTemperature, <span class="st">"-"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemperature =</span> <span class="fu">na_if</span>(MinTemperature, <span class="st">"-"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>all_na_temp_check <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="fu">is.na</span>(MinTemperature))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(all_na_temp_check)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>110587 rows of data missing all three!! how do we handle this</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weather<span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(MeanTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MaxTemperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(MinTemperature))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filtering-only-changi-station-from-weather-data" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-only-changi-station-from-weather-data">Filtering only Changi Station from weather data</h2>
+<p>Narrowing down our analyse only on Changi station.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Station <span class="sc">==</span> <span class="st">"Changi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-dengue-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-dengue-data">Importing Dengue Data</h2>
+<p>The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.</p>
+<p>The data set is also publicly available on <a href="https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases">NEA website</a> and <a href="https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin">Ministry of Health website.</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Weekly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Weekly"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Monthly_dengue <span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">"data/Denguecases.xlsx"</span>, <span class="st">"Monthly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Weekly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Week                2014              2015              2016      
+ Length:54          Min.   :  149.0   Min.   :   91.0   Min.   :   59  
+ Class :character   1st Qu.:  212.2   1st Qu.:  172.0   1st Qu.:  135  
+ Mode  :character   Median :  294.0   Median :  226.0   Median :  221  
+                    Mean   :  678.7   Mean   :  426.2   Mean   :  495  
+                    3rd Qu.:  437.8   3rd Qu.:  257.0   3rd Qu.:  308  
+                    Max.   :18326.0   Max.   :11294.0   Max.   :13117  
+                                      NA's   :1         NA's   :1      
+      2017             2018             2019            2020      
+ Min.   :  24.0   Min.   :  24.0   Min.   :   97   Min.   :  192  
+ 1st Qu.:  40.0   1st Qu.:  48.0   1st Qu.:  207   1st Qu.:  362  
+ Median :  52.0   Median :  58.0   Median :  287   Median :  423  
+ Mean   : 104.4   Mean   : 123.9   Mean   :  603   Mean   : 1306  
+ 3rd Qu.:  63.0   3rd Qu.:  75.0   3rd Qu.:  401   3rd Qu.:  918  
+ Max.   :2767.0   Max.   :3283.0   Max.   :15979   Max.   :35266  
+ NA's   :1        NA's   :1        NA's   :1                      
+      2021             2022            2023             2024        
+ Min.   :  42.0   Min.   :  106   Min.   : 100.0   Min.   :   71.0  
+ 1st Qu.:  74.0   1st Qu.:  290   1st Qu.: 138.0   1st Qu.:  155.0  
+ Median : 104.0   Median :  472   Median : 192.0   Median :  291.0  
+ Mean   : 198.4   Mean   : 1214   Mean   : 375.4   Mean   :  515.1  
+ 3rd Qu.: 129.0   3rd Qu.:  942   3rd Qu.: 234.0   3rd Qu.:  337.0  
+ Max.   :5258.0   Max.   :32173   Max.   :9949.0   Max.   :13651.0  
+ NA's   :1        NA's   :1       NA's   :1        NA's   :1        </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Monthly_dengue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Month/Year             2014            2015            2016      
+ Length:13          Min.   :  638   Min.   :  521   Min.   :  276  
+ Class :character   1st Qu.: 1024   1st Qu.:  656   1st Qu.:  723  
+ Mode  :character   Median : 1436   Median :  941   Median :  986  
+                    Mean   : 2819   Mean   : 1738   Mean   : 2018  
+                    3rd Qu.: 1887   3rd Qu.: 1237   3rd Qu.: 1863  
+                    Max.   :18326   Max.   :11294   Max.   :13117  
+      2017             2018             2019            2020      
+ Min.   : 157.0   Min.   : 136.0   Min.   :  440   Min.   : 1077  
+ 1st Qu.: 191.0   1st Qu.: 199.0   1st Qu.: 1039   1st Qu.: 1535  
+ Median : 246.0   Median : 296.0   Median : 1262   Median : 2116  
+ Mean   : 425.7   Mean   : 505.1   Mean   : 2458   Mean   : 5426  
+ 3rd Qu.: 254.0   3rd Qu.: 322.0   3rd Qu.: 1796   3rd Qu.: 4851  
+ Max.   :2767.0   Max.   :3283.0   Max.   :15979   Max.   :35266  
+      2021             2022            2023           2024      
+ Min.   : 220.0   Min.   :  603   Min.   : 489   Min.   :  391  
+ 1st Qu.: 340.0   1st Qu.: 1434   1st Qu.: 728   1st Qu.:  726  
+ Median : 427.0   Median : 2012   Median : 878   Median : 1224  
+ Mean   : 808.9   Mean   : 4950   Mean   :1531   Mean   : 2100  
+ 3rd Qu.: 629.0   3rd Qu.: 4210   3rd Qu.: 961   3rd Qu.: 1466  
+ Max.   :5258.0   Max.   :32173   Max.   :9949   Max.   :13651  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi <span class="ot">&lt;-</span> weather_filtered_changi <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Daily Rainfall Total (mm)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest 30 min Rainfall (mm)</span><span class="st">`</span>, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Highest 60 min Rainfall (mm)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Highest 120 min Rainfall (mm)</span><span class="st">`</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">na_if</span>(., <span class="st">"-"</span>)  <span class="co"># replace dash with NA</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Mean_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Maximum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Minimum_Temperature_C <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Daily_Rainfall_Total <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Daily Rainfall Total (mm)</span><span class="st">`</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Highest_30min_Rainfall <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Highest 30 min Rainfall (mm)</span><span class="st">`</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Highest_60min_Rainfall <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Highest 60 min Rainfall (mm)</span><span class="st">`</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>weather_filtered_changi<span class="sc">$</span>Highest_120min_Rainfall <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(weather_filtered_changi<span class="sc">$</span><span class="st">`</span><span class="at">Highest 120 min Rainfall (mm)</span><span class="st">`</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>weather_Monthly <span class="ot">&lt;-</span> weather_filtered_changi <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Month) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">AvgMeanTemp =</span> <span class="fu">mean</span>(Mean_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">MaxTemp =</span> <span class="fu">max</span>(Maximum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">MinTemp =</span> <span class="fu">min</span>(Minimum_Temperature_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalDailyRain =</span> <span class="fu">sum</span>(Daily_Rainfall_Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total30MinRain =</span> <span class="fu">sum</span>(Highest_30min_Rainfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total60MinRain =</span> <span class="fu">sum</span>(Highest_60min_Rainfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total120MinRain =</span> <span class="fu">sum</span>(Highest_120min_Rainfall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">MonthYear =</span> <span class="fu">paste0</span>(Year, <span class="st">"-"</span>, <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, Month)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Monthly_dengue_longer <span class="ot">&lt;-</span> Monthly_dengue <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"denguecases"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>, <span class="st">"Total"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">`</span><span class="at">Month/Year</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">as.numeric</span>(Year),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Month =</span> <span class="fu">as.numeric</span>(Month),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">MonthYear =</span> <span class="fu">paste0</span>(Year, <span class="st">"-"</span>, <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, Month))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="electricity-data-preparing-from-t3.5-sheet---monthly-electricity-consumption-by-planning-area-dwelling-type-2005-2024" class="level2">
+<h2 class="anchored" data-anchor-id="electricity-data-preparing-from-t3.5-sheet---monthly-electricity-consumption-by-planning-area-dwelling-type-2005-2024">Electricity Data Preparing from T3.5 Sheet - Monthly Electricity Consumption by Planning Area &amp; Dwelling Type, 2005 – 2024</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading raw sheet</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>electricity_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/electricityconsumption.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T3.5"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting year and month headers</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>years_raw <span class="ot">&lt;-</span> <span class="fu">as.character</span>(electricity_raw[<span class="dv">4</span>, ])</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>months_raw <span class="ot">&lt;-</span> <span class="fu">as.character</span>(electricity_raw[<span class="dv">5</span>, ])</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward-filling year values</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>years_filled <span class="ot">&lt;-</span> <span class="fu">na.locf</span>(years_raw, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>months_filled <span class="ot">&lt;-</span> months_raw</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Building proper MonthYear labels</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>month_year_labels <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(years_filled) <span class="sc">|</span> <span class="fu">is.na</span>(months_filled) <span class="sc">|</span> <span class="fu">str_detect</span>(<span class="fu">tolower</span>(months_filled), <span class="st">"annual"</span>),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(years_filled, <span class="st">"-"</span>, <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, <span class="fu">as.numeric</span>(months_filled)))</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>month_year_labels[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Region"</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing invalid columns</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>valid_cols <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(month_year_labels)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>electricity_raw <span class="ot">&lt;-</span> electricity_raw[, valid_cols]</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>month_year_labels <span class="ot">&lt;-</span> month_year_labels[valid_cols]</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Assigning cleaned column names</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(electricity_raw) <span class="ot">&lt;-</span> month_year_labels</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract actual data rows</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>electricity_data <span class="ot">&lt;-</span> electricity_raw[<span class="dv">6</span><span class="sc">:</span><span class="fu">nrow</span>(electricity_raw), ]</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for Changi only</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>electricity_changi <span class="ot">&lt;-</span> electricity_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Region <span class="sc">==</span> <span class="st">"Changi"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>Region,</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"MonthYear"</span>,</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Electricity_KWh"</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">Electricity_KWh =</span> <span class="fu">if_else</span>(Electricity_KWh <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"s"</span>), <span class="cn">NA_character_</span>, Electricity_KWh),</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">Electricity_KWh =</span> <span class="fu">parse_number</span>(Electricity_KWh)</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(MonthYear) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Electricity_KWh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="combining-all-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="combining-all-datasets">Combining all Datasets</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> Monthly_dengue_longer <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(weather_Monthly, <span class="at">by =</span> <span class="st">"MonthYear"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(electricity_changi, <span class="at">by =</span> <span class="st">"MonthYear"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="removing-duplicates-columns" class="level2">
+<h2 class="anchored" data-anchor-id="removing-duplicates-columns">Removing Duplicates columns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> combined_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Year.y, <span class="sc">-</span>Month.y, <span class="sc">-</span>Region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="time-series-forecasting" class="level1">
+<h1>4. Time Series Forecasting</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting MonthYear to proper date format</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> combined_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(MonthYear))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregating data by month</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>combined_data_agg <span class="ot">&lt;-</span> combined_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">denguecases =</span> <span class="fu">sum</span>(denguecases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Electricity_KWh =</span> <span class="fu">sum</span>(Electricity_KWh, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">AvgMeanTemp =</span> <span class="fu">mean</span>(AvgMeanTemp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalDailyRain =</span> <span class="fu">sum</span>(TotalDailyRain, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating tsibble for time series dataframe</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="ot">&lt;-</span> combined_data_agg <span class="sc">%&gt;%</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting multiple variables for overview</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date, denguecases, Electricity_KWh, AvgMeanTemp, TotalDailyRain) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Date, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Time Series of Dengue, Electricity, and Weather Variables"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Value"</span>) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>AvgMeanTemp</p>
+<ul>
+<li><p>Exhibits a highly regular seasonal pattern, peaking mid-year and dipping towards the start and end of each calendar year.</p></li>
+<li><p>The temperature fluctuates between approximately 26°C and 29°C, characteristic of a tropical region.</p></li>
+<li><p>The seasonal pattern is stable and consistent, with no noticeable long-term trend (no significant warming or cooling across years).</p></li>
+</ul>
+<p>Implication: The strong seasonality and stationarity make AvgMeanTemp a suitable candidate for seasonal forecasting models or as a covariate in dengue prediction.</p>
+<p>Dengue Cases</p>
+<ul>
+<li><p>Demonstrates episodic spikes with significant outbreaks occurring around: Early 2015, Mid-2020 Mid-to-late 2023 (the most extreme spike)</p></li>
+<li><p>Post-outbreak, a rapid decline is observed each time, suggesting a return to baseline levels.</p></li>
+</ul>
+<p>Implication: Unlike temperature, dengue cases do not follow a consistent seasonal trend, but show irregular epidemic patterns. These may be triggered by environmental conditions, rainfall, or public health dynamics. Modeling dengue will require accounting for these non-seasonal, high-variance features, potentially using ARIMA, ETS, or hybrid models with external regressors.</p>
+<p>Electricity_KWh</p>
+<ul>
+<li><p>Shows mild seasonal variation and general stability until late 2023.</p></li>
+<li><p>A noticeable drop in electricity consumption begins in late 2023, reaching near-zero by 2025. The drop is likely due to missing or misreported data, not an actual collapse in consumption.</p></li>
+</ul>
+<p>Implication: Electricity data can provide indirect clues about population behavior or climatic demand (e.g., cooling).</p>
+<p>TotalDailyRain</p>
+<ul>
+<li><p>Displays high volatility and lacks a regular seasonal cycle.</p></li>
+<li><p>Significant rainfall peaks occur sporadically, notably: Late 2019 (preceding the 2020 dengue outbreak), Mid 2022</p></li>
+<li><p>Some alignment between rainfall surges and subsequent dengue outbreaks, potentially indicating a lagged causal relationship.</p></li>
+</ul>
+<p>Implication: Rainfall may act as a leading indicator for dengue via its influence on mosquito breeding conditions. Cross-correlation or lag analysis is recommended to quantify this relationship for modeling purposes.</p>
+<section id="seasonal-subseries-plots-all-variables" class="level2">
+<h2 class="anchored" data-anchor-id="seasonal-subseries-plots-all-variables">4.1 Seasonal &amp; Subseries Plots (All variables)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting to long format for seasonal and subseries plots</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ts_longer <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date, denguecases, Electricity_KWh, AvgMeanTemp, TotalDailyRain) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Date, <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Seasonal plots</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_season</span>(Value) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Seasonal Patterns of Dengue, Electricity &amp; Weather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subseries (Cycle) plots</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_subseries</span>(Value) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cycle Subseries Plots: Trend + Seasonality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>AvgMeanTemp (Temperature)</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>Temperature follows a <strong>strong seasonal cycle</strong>, peaking between <strong>May–July</strong> and dipping during <strong>December–January</strong> every year.</p></li>
+<li><p>Curves are tightly clustered, suggesting <strong>high seasonal consistency</strong> across years.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>The <strong>blue monthly means</strong> stay mostly stable.</p></li>
+<li><p>Each year’s temperature follows a nearly identical profile → <strong>very reliable seasonal pattern</strong>.</p></li>
+</ul>
+<p><strong>Implication</strong>: This is a classic seasonal series — perfect candidate for models with additive/multiplicative seasonal components (e.g., ETS(M,A,M)).</p>
+<p><strong>Dengue Cases</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>Some years (like <strong>2020</strong>) show <strong>large peaks mid-year</strong> (June–August), but the overall pattern is <strong>inconsistent across years</strong>.</p></li>
+<li><p>Most years stay flat or low — outbreaks are <strong>sporadic</strong>, not regular.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>Most months have low values, except <strong>occasional extreme outliers</strong> in mid-year months like June and July.</p></li>
+<li><p>Seasonality exists but is <strong>irregular and event-driven</strong> (e.g., epidemics)</p></li>
+</ul>
+<p><strong>Implication</strong>: Dengue is <strong>not purely seasonal</strong>. Use models that can handle irregular surges — ARIMA or hybrid models with regressors may be better suited.</p>
+<p><strong>Electricity_KWh</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>Electricity usage is <strong>fairly stable</strong> month to month with <strong>slight increases mid-year</strong>, likely due to cooling demands in hotter months</p></li>
+<li><p>The 2024 line <strong>drops to zero after July</strong>, signaling <strong>missing data</strong>, not a real-world trend.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>Minor seasonal variation (slight rise in May–July), but not strong.</p></li>
+<li><p>The subseries emphasizes the sudden drop in 2024, reinforcing the likelihood of <strong>data gaps</strong>.</p></li>
+</ul>
+<p><strong>Implication</strong>: While not strongly seasonal, this variable may still track with temperature. Handle 2023+ data cautiously due to likely incompleteness.</p>
+<p><strong>TotalDailyRain</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>No clear seasonality — rainfall is <strong>highly volatile</strong>, but some spikes tend to occur between <strong>May–September</strong>.</p></li>
+<li><p>Very high values in 2020 and 2023 suggest <strong>extreme rainfall events</strong>.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>A few months (e.g., May–July) show large variations across years</p></li>
+<li><p>No month consistently shows high rainfall across all years — seasonality is <strong>weak and inconsistent</strong>.</p></li>
+</ul>
+<p><strong>Implication</strong>: Rainfall doesn’t follow a regular cycle — best treated as a <strong>lagged external driver</strong> of dengue (e.g., via cross-correlation).</p>
+</section>
+<section id="dengue-cases" class="level2">
+<h2 class="anchored" data-anchor-id="dengue-cases">4.2 Dengue Cases</h2>
+<section id="time-series-decomposition-of-dengue-cases-acf-stl-classical" class="level3">
+<h3 class="anchored" data-anchor-id="time-series-decomposition-of-dengue-cases-acf-stl-classical">4.2.1 Time Series Decomposition of Dengue Cases (ACF, STL, Classical)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ACF &amp; PACF for Dengue cases</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ACF</span>(denguecases) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ACF of Dengue Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">PACF</span>(denguecases) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PACF of Dengue Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Composite plot (Line, ACF, Seasonality)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_tsdisplay</span>(denguecases, <span class="at">plot_type =</span> <span class="st">"partial"</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dengue Cases - Trend, ACF, and Seasonality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-22-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># STL Decomposition</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(denguecases)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"STL Decomposition of Dengue Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-22-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classical Decomposition</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">classical_decomposition</span>(denguecases, <span class="at">type =</span> <span class="st">"additive"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Classical Additive Decomposition of Dengue Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-22-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The ACF plot shows strong autocorrelation for dengue cases up to around lag 3–4 months, meaning dengue cases today are influenced by cases from a few months ago. The PACF plot suggests that a 1-month lag has the most direct influence. This kind of pattern is common in seasonal diseases like dengue.</p>
+<p>Composite plot confirms:</p>
+<ol type="1">
+<li><p>Strong seasonality, with dengue peaks recurring yearly.</p></li>
+<li><p>ACF shows long autocorrelation tail (suggesting non-stationarity).The slow decay in the ACF is indicative of non-stationarity, suggesting the need for differencing before applying ARIMA models.</p></li>
+<li><p>PACF indicates 1–2 significant lags, which helps in ARIMA modeling later.The PACF plot exhibits a sharp drop after lag 1, suggesting an AR(1) structure, which is common in short-memory processes.</p></li>
+</ol>
+<p>STL Decomposition:</p>
+<ol type="1">
+<li><p>The trend line reveals rising dengue trends until around 2020, followed by a decline.</p></li>
+<li><p>Seasonal component shows dengue spikes happen almost every year between June to October—coinciding with rainy seasons in tropical countries.</p></li>
+<li><p>Remainder shows noise or irregularity not explained by trend or seasonality.</p></li>
+</ol>
+<p>Classical Decomposition:</p>
+<ol type="1">
+<li><p>Similar insights as STL, but less flexible.</p></li>
+<li><p>Shows strong seasonality and mid-2019 to 2021 surge in trend.</p></li>
+<li><p>Residuals are still present, which shows the importance of forecasting models to capture these dynamics.</p></li>
+</ol>
+<p>The analysis decomposed dengue time series into trend, seasonality, and irregular components using both STL and classical methods.STL is particularly helpful because it allows for changing seasonal patterns over time and handles outliers more gracefully compared to classical methods.The STL plot revealed a clear seasonal cycle where dengue cases peak mid-year, aligning with wetter months. ACF and PACF plots showed significant correlation with recent months, highlighting temporal dependency. These insights confirm that dengue has strong yearly patterns, a rising-falling long-term trend, and some random fluctuations. This justifies using seasonal ARIMA or ETS models for better forecasting of future dengue outbreaks.</p>
+</section>
+<section id="ets-forecasting-of-dengue-cases" class="level3">
+<h3 class="anchored" data-anchor-id="ets-forecasting-of-dengue-cases">4.2.2 ETS Forecasting of Dengue Cases</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining training vs test set (last 12 months as test)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dengue_ts <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date, denguecases) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Type =</span> <span class="fu">if_else</span>(Date <span class="sc">&gt;=</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>), <span class="st">"Test"</span>, <span class="st">"Train"</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>dengue_train <span class="ot">&lt;-</span> dengue_ts <span class="sc">%&gt;%</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Type <span class="sc">==</span> <span class="st">"Train"</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting ETS model</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>fit_ets <span class="ot">&lt;-</span> dengue_train <span class="sc">%&gt;%</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">ETS</span>(denguecases))</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking residuals</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>fit_ets <span class="sc">%&gt;%</span> <span class="fu">gg_tsresiduals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fit_ets <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: denguecases 
+Model: ETS(M,N,M) 
+  Smoothing parameters:
+    alpha = 0.9996843 
+    gamma = 0.0001178125 
+
+  Initial states:
+     l[0]      s[0]    s[-1]    s[-2]    s[-3]   s[-4]    s[-5]    s[-6]
+ 6554.158 0.8417352 0.785766 0.988454 1.135488 1.22024 1.370364 1.246979
+    s[-7]     s[-8]     s[-9]    s[-10]   s[-11]
+ 1.050372 0.7703541 0.7981549 0.7391517 1.052942
+
+  sigma^2:  0.1539
+
+     AIC     AICc      BIC 
+2397.179 2401.795 2438.992 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast for 12 months</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fc_ets <span class="ot">&lt;-</span> fit_ets <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting with actual + forecasted + fitted</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>dengue_ts <span class="sc">%&gt;%</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> denguecases)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> Type), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(fc_ets, <span class="at">series =</span> <span class="st">"Forecast"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">augment</span>(fit_ets), <span class="fu">aes</span>(<span class="at">y =</span> .fitted, <span class="at">color =</span> <span class="st">"Fitted"</span>)) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ETS Forecast vs Actual Dengue Cases"</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Dengue Cases"</span>, <span class="at">color =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>ETS Modeling and Forecasting of Dengue Cases An Exponential Smoothing State Space (ETS) model was used to forecast monthly dengue cases, leveraging historical data up to December 2023.</p>
+<ul>
+<li><p>The data was split into training (pre-2024) and testing (2024 onward) sets to evaluate model accuracy.</p></li>
+<li><p>An ETS(M,N,M) model was automatically selected, indicating multiplicative error and seasonality with no trend component.</p></li>
+<li><p>Smoothing parameters suggest that the model gives higher weight to recent values and assumes stable seasonality over time.</p></li>
+</ul>
+<p>Residual diagnostics showed:</p>
+<ul>
+<li><p>No significant autocorrelation left in the residuals.</p></li>
+<li><p>Residuals are mostly centered around zero with moderate spread, validating model assumptions.</p></li>
+</ul>
+<p>Forecast accuracy:</p>
+<ul>
+<li><p>The 12-month forecast captured the seasonal dengue peaks.</p></li>
+<li><p>Actual test values for 2024 were largely within the prediction intervals (80% and 95%).</p></li>
+<li><p>Fitted values closely matched training data.</p></li>
+</ul>
+<p>These results confirm the ETS model’s ability to effectively capture dengue seasonality and provide reasonably accurate forecasts. This can be useful for early outbreak warnings and public health planning.</p>
+</section>
+<section id="arima-forecasting-comparison-with-ets" class="level3">
+<h3 class="anchored" data-anchor-id="arima-forecasting-comparison-with-ets">4.2.3 ARIMA Forecasting + Comparison with ETS</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fit_arima <span class="ot">&lt;-</span> dengue_train <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">ARIMA</span>(denguecases))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Model report</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>fit_arima <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: denguecases 
+Model: ARIMA(2,0,0)(0,0,1)[12] w/ mean 
+
+Coefficients:
+         ar1      ar2    sma1   constant
+      1.1844  -0.3764  0.2177  1390.5368
+s.e.  0.0880   0.0852  0.1020   405.8765
+
+sigma^2 estimated as 14796993:  log likelihood=-1159.95
+AIC=2329.9   AICc=2330.43   BIC=2343.84</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast 12 months</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fc_arima <span class="ot">&lt;-</span> fit_arima <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing ETS vs ARIMA model performance</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  fit_arima <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  fit_ets <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  fc_arima <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(dengue_ts),</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  fc_ets <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(dengue_ts)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(.model, .type, RMSE, MAE, MASE, RMSSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+  .model             .type     RMSE   MAE  MASE RMSSE
+  &lt;chr&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 ARIMA(denguecases) Training 3782. 2386. 0.307 0.322
+2 ETS(denguecases)   Training 3636. 2123. 0.273 0.310
+3 ARIMA(denguecases) Test     4933. 4682. 0.602 0.420
+4 ETS(denguecases)   Test     5137. 4740. 0.609 0.438</code></pre>
+</div>
+</div>
+<p>The ETS (Error-Trend-Seasonality) model was used to forecast dengue cases 12 months beyond the training period. The forecast closely followed historical seasonal trends, and most observed values during the test period fell within the model’s 80% and 95% prediction intervals. This suggests the model captures seasonality well and provides reasonable uncertainty estimates.</p>
+<p>However, some underestimation occurred during sharp spikes in dengue cases, a common challenge with smoother ETS models that assume regular seasonal structure.</p>
+<p>An ARIMA(2,0,0)(0,0,1)[12] model was also fitted, which includes:</p>
+<ul>
+<li><p>Two autoregressive (AR) terms to capture short-term memory,</p></li>
+<li><p>A seasonal moving average (SMA) term at lag 12 to model annual seasonality,</p></li>
+<li><p>No differencing, indicating the data is already stationary.</p></li>
+</ul>
+<p>Although the AIC and BIC values for ARIMA were slightly higher than those of ETS, indicating a marginally worse fit to the training data, the ARIMA model performed better on the test set based on forecast accuracy metrics:</p>
+<ul>
+<li><p>Lower RMSE and RMSSE on test data,</p></li>
+<li><p>MASE &lt; 1 for both models, confirming both outperform a naïve seasonal benchmark.</p></li>
+</ul>
+<p>These results suggest:</p>
+<ul>
+<li><p>ETS is better at fitting past values (in-sample), and offers a more interpretable model structure.</p></li>
+<li><p>ARIMA generalizes better to unseen data (out-of-sample), making it more suitable for forecasting in real-world settings.</p></li>
+</ul>
+<p>Overall, both models effectively captured the strong seasonal structure of dengue outbreaks. ETS may be preferred when stability and interpretability are needed, whereas ARIMA may be more useful when forecasting accuracy is the top priority.</p>
+</section>
+<section id="forecast-plots-for-ets-vs-arima" class="level3">
+<h3 class="anchored" data-anchor-id="forecast-plots-for-ets-vs-arima">4.2.4 Forecast Plots for ETS vs ARIMA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting Forecasts from Both Models for Comparison</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>fc_ets <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(dengue_ts, <span class="at">level =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(fc_arima, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">level =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Forecast Comparison: ETS vs ARIMA"</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Dengue Cases"</span>, <span class="at">x =</span> <span class="st">"Date"</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Forecast"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"ARIMA"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The forecast comparison plot overlays the predicted dengue cases from both ETS and ARIMA models for the test period (2024 onward):</p>
+<ul>
+<li><p>Historical trend (black line) shows clear annual peaks with recent decline into 2024.</p></li>
+<li><p>ETS forecast (blue) continues a smoothed seasonal trend, slightly overpredicting dengue in the latter months.</p></li>
+<li><p>ARIMA forecast (red) exhibits a flatter trajectory, indicating a more conservative response to the recent drop in cases.</p></li>
+<li><p>Both forecasts attempt to follow the general seasonal pattern, but diverge slightly in magnitude and turning points.</p></li>
+</ul>
+<p>The visual comparison between ETS and ARIMA forecasts shows both models track recent dengue patterns but with subtle differences. ETS maintains a smoother seasonal pattern, while ARIMA is more responsive to the recent downturn, producing lower forecasts in the early months of 2024. The divergence underscores how different model structures handle trend and seasonality. While ETS may better represent long-term seasonality, ARIMA may better reflect recent changes in dynamics. This reinforces the importance of selecting a model aligned with the forecasting goal—whether short-term responsiveness or long-term seasonal stability.</p>
+</section>
+</section>
+<section id="decomposition-of-all-variables-trend-seasonality" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition-of-all-variables-trend-seasonality">4.3 Decomposition of All Variables (Trend + Seasonality)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Decompose AvgMeanTemp, Electricity_KWh, TotalDailyRain</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting to long format and decompose each using STL</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(AvgMeanTemp, Electricity_KWh, TotalDailyRain),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(Value)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"STL Decomposition of Weather and Electricity Variables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The STL decomposition plot separates each variable into trend, seasonal, and remainder (residual) components, offering deeper insights into their temporal behavior.</p>
+<ul>
+<li><p>Electricity_KWh (green): Shows a steady upward trend until around 2022, followed by a sharp decline, possibly due to external disruptions (e.g., policy shifts, data gaps, or economic factors). The seasonal pattern is strong and consistent, reflecting cyclical consumption behaviors — likely tied to climate or activity cycles.</p></li>
+<li><p>TotalDailyRain (blue): Exhibits pronounced seasonal variation with clear annual peaks and troughs, aligning with expected monsoon or wet seasons. The trend rises steadily until about 2022–2023 before declining, potentially pointing to changing rainfall intensity or data completeness issues.</p></li>
+<li><p>AvgMeanTemp (red): Remains relatively flat across all components, with minimal visible trend or seasonal amplitude. This suggests temperature is more stable over time, or its variation is less influential compared to the other variables.</p></li>
+</ul>
+<p>Overall, the STL decomposition effectively isolates long-term trends from recurring seasonal patterns and residual noise. This helps in identifying stable patterns versus anomalies and informs the design of more robust forecasting models — especially when assessing dengue outbreaks in relation to climate and electricity factors.</p>
+</section>
+<section id="trend-exploration-between-variables" class="level2">
+<h2 class="anchored" data-anchor-id="trend-exploration-between-variables">4.4 Trend Exploration Between Variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forcing it into a regular data frame to avoid tsibble-related metadata</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>cor_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span>  <span class="co"># dropping tsibble-specific indexing</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(denguecases, AvgMeanTemp, TotalDailyRain, Electricity_KWh) <span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric))  <span class="co"># force all to numeric</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing correlation matrix</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_data, <span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Result</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>cor_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                denguecases AvgMeanTemp TotalDailyRain Electricity_KWh
+denguecases            1.00        0.13           0.11            0.25
+AvgMeanTemp            0.13        1.00          -0.35            0.15
+TotalDailyRain         0.11       -0.35           1.00            0.17
+Electricity_KWh        0.25        0.15           0.17            1.00</code></pre>
+</div>
+</div>
+<p>The correlation matrix provides an overview of linear relationships between dengue cases, weather factors, and electricity usage.</p>
+<p>Dengue cases show a weak positive correlation with:</p>
+<ul>
+<li><p>Electricity consumption (0.25): This could reflect increased indoor activity or reporting during higher usage periods.</p></li>
+<li><p>Average temperature (0.13) and rainfall (0.11): Slight associations, possibly due to mosquito breeding environments but not strongly linear.</p></li>
+</ul>
+<p>Average temperature and total rainfall are negatively correlated (-0.35) — possibly reflecting seasonal climatic cycles (e.g., lower temperatures during rainy months).</p>
+<p>Electricity_KWh has small positive correlations with all other variables, hinting at indirect links to environmental and behavioral factors.</p>
+<p>Overall, no strong linear correlation exists, but weak signals support the idea of seasonal and environmental influence on dengue trends. These patterns align with earlier STL and decomposition findings, reinforcing the importance of incorporating seasonality and nonlinear dynamics in forecasting models.</p>
+</section>
+<section id="cross-correlation-ccf-to-explore-lag-effects" class="level2">
+<h2 class="anchored" data-anchor-id="cross-correlation-ccf-to-explore-lag-effects">4.5 Cross-correlation (CCF) to Explore Lag Effects</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking if rainfall or temperature leads to changes in dengue cases</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CCF</span>(denguecases, TotalDailyRain) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"CCF: Dengue Cases vs Total Rainfall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CCF</span>(denguecases, AvgMeanTemp) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"CCF: Dengue Cases vs Avg Temp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dengue Cases vs.&nbsp;Total Rainfall - The CCF plot shows significant positive correlations at lags 5 to 10 months, peaking around lag 6–7.</p>
+<ul>
+<li><p>Interpretation: This suggests that rainfall leads dengue outbreaks by ~6–7 months. This makes biological sense — increased rain can enhance mosquito breeding grounds, which over time leads to higher dengue incidence.</p></li>
+<li><p>Implication: Rainfall is a useful early predictor for dengue case forecasting. Interventions (e.g., mosquito control) should ideally begin several months after heavy rains.</p></li>
+</ul>
+<p>Dengue Cases vs.&nbsp;Avg Temperature - The CCF plot shows weaker correlations but some positive values and negative spikes beyond lag 3.</p>
+<ul>
+<li><p>Interpretation: Temperature has a modest positive correlation shortly before or around the outbreak, possibly due to optimal mosquito survival conditions.</p></li>
+<li><p>The negative lags may reflect post-outbreak climatic cooling or statistical noise.</p></li>
+</ul>
+<p>Overall: Temperature may play a supportive but less dominant role compared to rainfall in triggering outbreaks</p>
+</section>
+<section id="build-forecasting-models-for-weather-electricity" class="level2">
+<h2 class="anchored" data-anchor-id="build-forecasting-models-for-weather-electricity">4.6 Build Forecasting Models for Weather &amp; Electricity</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fable)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fabletools)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering training data (before Jan 2024)</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>))</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ETS models separately</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>model_temp <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ETS</span>(AvgMeanTemp))</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>model_rain <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ETS</span>(TotalDailyRain))</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>model_elec <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ETS</span>(Electricity_KWh))</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast individually for 12 months ahead</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>fc_temp <span class="ot">&lt;-</span> model_temp <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>fc_rain <span class="ot">&lt;-</span> model_rain <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>fc_elec <span class="ot">&lt;-</span> model_elec <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting forecasts to tibbles, remove distribution column, and label them</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>fc_temp_df <span class="ot">&lt;-</span> fc_temp <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"AvgMeanTemp"</span>)</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>fc_rain_df <span class="ot">&lt;-</span> fc_rain <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"TotalDailyRain"</span>)</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>fc_elec_df <span class="ot">&lt;-</span> fc_elec <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>)</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining into one tidy dataframe</span></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>weather_fc <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(fc_temp_df, fc_rain_df, fc_elec_df)</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting forecasted weather &amp; electricity</span></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>weather_fc <span class="sc">%&gt;%</span></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> .mean, <span class="at">color =</span> Variable)) <span class="sc">+</span></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Forecasts: Weather &amp; Electricity (Next 12 Months)"</span>,</span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Forecasted Value"</span>,</span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span></span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot presents 12-month ETS-based forecasts (Jan–Dec 2024) for three key variables: average temperature, total rainfall, and electricity consumption.</p>
+<p>AvgMeanTemp (Temperature) - Exhibits a strong and smooth seasonal pattern, peaking during April to July, then gradually declining. - This aligns well with historical climate patterns and confirms ETS’s suitability for temperature forecasting due to its consistent cyclical nature.</p>
+<p>TotalDailyRain (Rainfall) - Shows greater volatility and sharper fluctuations, with a peak forecast toward late 2024. - These spikes likely correspond to rainy or monsoon seasons, which are important precursors for mosquito breeding and, hence, dengue outbreaks.</p>
+<p>Electricity_KWh - Remains relatively stable, with a notable mid-year peak—likely due to increased cooling demand during hotter months. - This again reflects seasonal human behavior and infrastructure load, reinforcing patterns seen in past data.</p>
+</section>
+<section id="accuracy-comparison-for-weather-forecasts" class="level2">
+<h2 class="anchored" data-anchor-id="accuracy-comparison-for-weather-forecasts">4.7 Accuracy Comparison for Weather Forecasts</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting actual test data for Jan 2024 onwards</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date, AvgMeanTemp, TotalDailyRain, Electricity_KWh)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing forecast accuracy before converting to tibble</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Temp forecast accuracy</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>acc_temp <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fc_temp, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, AvgMeanTemp)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"AvgMeanTemp"</span>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Rain forecast accuracy</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>acc_rain <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fc_rain, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, TotalDailyRain)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"TotalDailyRain"</span>)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Elec forecast accuracy</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>acc_elec <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fc_elec, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Electricity_KWh)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining all into one summary table</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>weather_accuracy <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(acc_temp, acc_rain, acc_elec) <span class="sc">%&gt;%</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Variable, .model, .type, RMSE, MAE, MAPE)</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Results</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>weather_accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  Variable        .model               .type     RMSE      MAE   MAPE
+  &lt;chr&gt;           &lt;chr&gt;                &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1 AvgMeanTemp     ETS(AvgMeanTemp)     Test     0.355    0.296   1.05
+2 TotalDailyRain  ETS(TotalDailyRain)  Test  1709.    1439.    499.  
+3 Electricity_KWh ETS(Electricity_KWh) Test  1895.    1436.    Inf   </code></pre>
+</div>
+</div>
+<p>The ETS model performed exceptionally well for forecasting average temperature, with low RMSE and a MAPE below 2%. This indicates the model was able to capture the stable seasonal structure of temperature effectively, aligning well with earlier decomposition results that showed clear yearly cycles.</p>
+<p>In contrast, forecasting performance for rainfall and electricity consumption was noticeably weaker:</p>
+<ul>
+<li><p>Rainfall showed an extremely high MAPE, driven by its erratic and spiky behavior. ETS models, which assume smooth seasonality, struggle with this level of variability.</p></li>
+<li><p>Electricity consumption forecasting was also less accurate. The model’s error was largely influenced by no data from mid 2024, which the model could not anticipate due to its reliance on historical seasonal patterns.</p></li>
+</ul>
+<p>These findings underscore an important limitation of basic ETS models: while they excel in capturing regular, repeating seasonal patterns, they may fail to adapt to sudden structural changes or highly volatile series.</p>
+</section>
+<section id="forecast-comparison-arima-vs-ets-rainfall-electricity-only" class="level2">
+<h2 class="anchored" data-anchor-id="forecast-comparison-arima-vs-ets-rainfall-electricity-only">4.8 Forecast Comparison: ARIMA vs ETS (Rainfall &amp; Electricity Only)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting ARIMA models on training data</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>model_rain_arima <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ARIMA</span>(TotalDailyRain))</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>model_elec_arima <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ARIMA</span>(Electricity_KWh))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generating 12-month forecasts</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>fc_rain_arima <span class="ot">&lt;-</span> model_rain_arima <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>fc_elec_arima <span class="ot">&lt;-</span> model_elec_arima <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy comparison on test data (Jan 2024 onwards)</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>acc_rain_compare <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(fc_rain, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, TotalDailyRain)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"TotalDailyRain"</span>, <span class="at">Model =</span> <span class="st">"ETS"</span>),</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(fc_rain_arima, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, TotalDailyRain)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"TotalDailyRain"</span>, <span class="at">Model =</span> <span class="st">"ARIMA"</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>acc_elec_compare <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(fc_elec, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Electricity_KWh)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>, <span class="at">Model =</span> <span class="st">"ETS"</span>),</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(fc_elec_arima, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Electricity_KWh)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>, <span class="at">Model =</span> <span class="st">"ARIMA"</span>)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining accuracy metrics</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>weather_compare <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(acc_rain_compare, acc_elec_compare) <span class="sc">%&gt;%</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Variable, Model, RMSE, MAE, MAPE)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting forecast accuracy comparison</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>weather_compare <span class="sc">%&gt;%</span></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(RMSE, MAE, MAPE), <span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Model, <span class="at">y =</span> Value, <span class="at">fill =</span> Model)) <span class="sc">+</span></span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Metric <span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"ETS vs ARIMA Forecast Accuracy: Rainfall &amp; Electricity"</span>,</span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Error Metric Value"</span>,</span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Model Type"</span></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Time_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The bar plot presents a side-by-side comparison of forecast accuracy between ETS and ARIMA models for rainfall and electricity consumption, evaluated using three common error metrics: RMSE, MAE, and MAPE.</p>
+<p>Across both variables—TotalDailyRain and Electricity_KWh—ETS consistently outperforms ARIMA on all three metrics.</p>
+<p>This suggests that ETS may better capture the underlying time series patterns, particularly in datasets with strong seasonal components and smoother trends.</p>
+<p>The lower errors from ETS indicate more accurate and stable forecasts, making it a more reliable choice in this context.</p>
+<p>While ARIMA remains a flexible model for handling noise and irregularities, in this case, ETS offers both superior accuracy and simplicity, especially for climate-related and consumption data that exhibit seasonality.</p>
+<p>These results support the idea that ETS is well-suited for structured, seasonal data, while ARIMA may still be useful for more irregular or highly autocorrelated series. The final model choice should consider both accuracy and the specific characteristics of the variable being forecasted.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -276,6 +1309,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -386,6 +1421,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
