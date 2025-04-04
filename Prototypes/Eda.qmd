@@ -56,7 +56,7 @@ The following code chuck is to read the weather data.
 
 ```{r}
 #| eval: False
-weather <- read_rds('data/Ex03/rds/weather.rds')
+weather <- read_rds('data/rds/weather.rds')
 
 ```
 
@@ -200,7 +200,7 @@ The data set were extracted and joined with the number of Households in Singapor
 
 ```{r}
 # Load Monthly electricity data
-Monthly_electricity <- read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Monthly")
+Monthly_electricity <- read_xlsx("data/electricityconsumption.xlsx", "Monthly")
 Monthly_electricity$Year <- as.numeric(Monthly_electricity$Year)
 Monthly_electricity$Monthly_Elec_consump <- as.numeric(Monthly_electricity$Monthly_Elec_consump)
 
@@ -223,12 +223,12 @@ Monthly_electricity <- Monthly_electricity %>%
 
 ```{r}
 #| eval: False
-yearly_electricity <-read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Yearly")
+yearly_electricity <-read_xlsx("data/electricityconsumption_DS.xlsx", "Yearly")
 ```
 
 ```{r}
 # Load yearly electricity data
-yearly_electricity <- read_xlsx("data/Ex03/electricityconsumption_DS.xlsx", "Yearly")
+yearly_electricity <- read_xlsx("data/electricityconsumption.xlsx", "Yearly")
 yearly_electricity$Year <- as.numeric(yearly_electricity$Year)
 yearly_electricity$Yearly_Elec_consump <- as.numeric(yearly_electricity$Yearly_Elec_consump)
 
@@ -282,6 +282,7 @@ write_rds(combined_Yearly_data, file = "data/Ex03/rds/combined_Yearly_data.rds")
 ```
 
 ```{r}
+#| eval: False
 combined_Yearly_data <- read_rds("data/Ex03/rds/combined_Yearly_data.rds")
 ```
 
