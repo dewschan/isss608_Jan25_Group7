@@ -1,13 +1,15 @@
 ---
-title: "Take Home Exercise 3"
+title: "Time Series Forecasting"
+format: html
 author: "Sathvika Subramanian"
 date: "March 27, 2025"
 date-modified: "last-modified"
 execute: 
-  echo: true
   eval: true
-  warning: false
+  echo: true
+  message: false
   freeze: true
+  warning: false
 ---
 
 # 1. Getting Started
