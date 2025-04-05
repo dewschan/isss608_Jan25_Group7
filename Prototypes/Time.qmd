@@ -1,5 +1,5 @@
 ---
-title: "Take Home Exercise 3"
+title: "Time Series Forecasting"
 format: html
 author: "Sathvika Subramanian"
 date: "March 27, 2025"
