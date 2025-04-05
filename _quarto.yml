@@ -19,7 +19,11 @@ website:
         - text: "Geospatial Analysis"
           href: Prototypes/Geo.html
       - text: "Shiny App"
-        href: Shiny/Prototype.html
+        menu: 
+        - text: EDA/CDA and Geospatial
+          href: Shiny/Prototype.html
+        - text: Time Series Forecasting
+          href: Shiny/Prototype1.html
       - text: "Team"
         menu:
         - Team.qmd
