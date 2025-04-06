@@ -2,10 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
-
 /.quarto/
 .Rdata
 .httr-oauth
 .DS_Store
 .quarto
 data/
+User_guide.docx
+user_guide_1.qmd

@@ -19,7 +19,9 @@ website:
         - text: "Geospatial Analysis"
           href: Prototypes/Geo.html
       - text: "Shiny App"
-        menu: 
+        menu:
+        - text: "User Guide (PDF)"
+          href: shiny/User_guide.pdf
         - text: EDA/CDA and Geospatial
           href: Shiny/Prototype.html
         - text: Time Series Forecasting
